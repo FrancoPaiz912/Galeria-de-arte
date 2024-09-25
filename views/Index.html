@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="principal.css" rel="stylesheet" />
+    <title>Document</title>
+</head>
+
+<body>    
+    <div id="contenedor-modal"></div>
+
+    <header class="grid-template">
+        <div class="contenedor-logo"><img src="../img/basicas/logo-negro.png" /></div>
+        <div class="contenedor-titulo">
+            <h1>Venta de Impresiones</h1>
+        </div>
+        <div class="contenedor-barras"><img src="../img/basicas/barras.png" id="menu-toggle" /></div>
+    </header>
+    <nav id="nav-menu" class="bebas-neue-regular">
+        <ul>
+            <li><a href="Index.html">Buscar</a></li>
+            <li><a href="/carrito.html">Carrito</a></li>
+            <li><a href="/coleccion.html">Colección</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="contenedor-busqueda">
+            <div class="contenedor-input-busqueda">
+                <input type="text" id="search-input" placeholder="Buscar...">
+            </div>
+            <div class="filtros arvo-regular">
+                <div class="filtro-categoria grid-template ">
+                    <label for="filtro-Clasificacion">Clasificacion</label>
+                    <select id="filtro-Clasificacion">
+                        <option value="21|26">Todos</option>
+                        <option value="21">Dibujos</option>
+                        <option value="26">Pinturas</option>
+                    </select>
+                </div>
+                <div class="filtro-categoria grid-template">
+                    <label for="filtro-Cultura">Cultura</label>
+                    <select id="filtro-Cultura">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+                <div class="filtro-categoria grid-template">
+                    <label for="filtro-Siglo">Siglo</label>
+                    <select id="filtro-Siglo">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+                <div class="filtro-categoria grid-template">
+                    <label for="filtro-Tipo-Trabajo">Tipo de trabajo</label>
+                    <select id="filtro-Tipo-Trabajo">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div id="card-container" class="contenedor-resultados grid-template">
+            
+        </div>
+
+        <div id="pagination-container"></div>
+
+        </div>
+    </main>
+    <footer>
+        <p>2024 ImprimiblesMP. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="../views/contenidoDinamico.js" type="module"></script>
+<script src="../views/modal.js" type="module"></script>
+<script src="../controllers/modal.js" type="module"></script>
+<script src="../controllers/filtros.js" type="module"></script>
+
+</html>
