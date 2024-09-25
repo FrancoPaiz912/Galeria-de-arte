@@ -2,14 +2,6 @@ import { getObjectMapper } from '../controllers/modal.js';
 import { fetchAndPopulateTemplate } from '../views/contenidoDinamico.js';
 
 $(document).ready(function () {
-    $('#nav-menu').hide(); // Oculta el nav al cargar la página 
-
-    $('#menu-toggle').click(function () {
-        $('#nav-menu').slideToggle(); // Alterna la visibilidad con una animación 
-    });
-});
-
-$(document).ready(function () {
     $('.opcion-tamano').on('click', function () {
         // Remover la clase 'seleccionado' de todas las opciones
         $('.opcion-tamano').removeClass('seleccionado');

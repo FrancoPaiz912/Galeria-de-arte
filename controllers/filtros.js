@@ -2,13 +2,14 @@ import {cargarFiltrosDibujos, cargarFiltrosPinturas } from '../Models/filtros.js
 import {opcionesFiltros} from '../views/contenidoDinamico.js';
 import {updateApiUri} from '../controllers/principal.js';
 import {generarContenedor} from '../controllers/principal.js';
+import {updateContent} from '../Models/llamadas.js';
 
 $(window).on('load', async function () {
     const filtrosdib = await cargarFiltrosDibujos();
     const filtrospin = await cargarFiltrosPinturas();
-    opcionesFiltros([...new Set([...filtrosdib.cultura, ...filtrospin.cultura])], cultura);
-    opcionesFiltros([...new Set([...filtrosdib.siglo, ...filtrospin.siglo])], siglo);
-    opcionesFiltros([...new Set([...filtrosdib.tipoTrabajo, ...filtrospin.tipoTrabajo])], tipoTrabajo);
+    opcionesFiltros([...new Set([...filtrosdib[0], ...filtrospin[0]])], cultura);
+    opcionesFiltros([...new Set([...filtrosdib[1], ...filtrospin[1]])], siglo);
+    opcionesFiltros([...new Set([...filtrosdib[2], ...filtrospin[2]])], tipoTrabajo);
     // try {
     //     const response = await fetch('http://localhost:3000/api/init');
     //     const data = await response.json();
@@ -29,21 +30,21 @@ $('#filtro-Clasificacion').on('change', async function () {
     if (selectedValue === "21|26") {
         const filtrosdib = await cargarFiltrosDibujos();
         const filtrospin = await cargarFiltrosPinturas();
-        opcionesFiltros([...new Set([...filtrosdib.cultura, ...filtrospin.cultura])], cultura);
-        opcionesFiltros([...new Set([...filtrosdib.siglo, ...filtrospin.siglo])], siglo);
-        opcionesFiltros([...new Set([...filtrosdib.tipoTrabajo, ...filtrospin.tipoTrabajo])], tipoTrabajo);
+        opcionesFiltros([...new Set([...filtrosdib[0], ...filtrospin[0]])], cultura);
+        opcionesFiltros([...new Set([...filtrosdib[1], ...filtrospin[1]])], siglo);
+        opcionesFiltros([...new Set([...filtrosdib[2], ...filtrospin[2]])], tipoTrabajo);
     }
     else if (selectedValue === "21") {
         const filtrosdib = await cargarFiltrosDibujos();
-        opcionesFiltros(filtrosdib.siglo, siglo);
-        opcionesFiltros(filtrosdib.cultura, cultura);
-        opcionesFiltros(filtrosdib.tipoTrabajo, tipoTrabajo);
+        opcionesFiltros(filtrosdib[0], cultura);
+        opcionesFiltros(filtrosdib[1], siglo);
+        opcionesFiltros(filtrosdib[2], tipoTrabajo);
     }
     else if (selectedValue === "26") {
         const filtrospin = await cargarFiltrosPinturas();
-        opcionesFiltros(filtrospin.siglo, siglo);
-        opcionesFiltros(filtrospin.cultura, cultura);
-        opcionesFiltros(filtrospin.tipoTrabajo, tipoTrabajo);
+        opcionesFiltros(filtrospin[0], cultura);
+        opcionesFiltros(filtrospin[1], siglo);
+        opcionesFiltros(filtrospin[2], tipoTrabajo);
     }
 });
 

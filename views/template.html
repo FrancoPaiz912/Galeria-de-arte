@@ -15,7 +15,7 @@
                 <h3 class="modal-titulo">{{title}}</h3>
                 <img src="../img/basicas/cruz.png" class="cerrar-modal" />
             </div>
-            <span class="artista"></span>
+            <span class="artista">{{people}}</span>
             <div class="contenedor-imagen-modal">
                 <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
                 <div class="compartir-coleccionar">
@@ -58,4 +58,28 @@
             </div>
         </div>
     </div>
+</template>
+
+<template id="header-nav-template">
+    <header class="grid-template">
+        <div class="contenedor-logo"><img src="../img/basicas/logo-negro.png" /></div>
+        <div class="contenedor-titulo">
+            <h1>Venta de Impresiones</h1>
+        </div>
+        <div class="contenedor-barras"><img src="../img/basicas/barras.png" id="menu-toggle" /></div>
+    </header>
+    <nav id="nav-menu" class="bebas-neue-regular">
+        <ul>
+            <li><a href="Index.html">Buscar</a></li>
+            <li><a href="/carrito.html">Carrito</a></li>
+            <li><a href="Coleccion.html">Colección</a></li>
+            <li><a href="Contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+</template>
+
+<template id="footer-template">
+    <footer>
+        <p>2024 ImprimiblesMP. Todos los derechos reservados.</p>
+    </footer>
 </template>

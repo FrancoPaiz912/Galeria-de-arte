@@ -24,59 +24,6 @@ app.get('/api/init', async (req, res) => {
     res.json(result);
 });
 
-app.get('/api/sigloDib', async (req, res) => {
-    fs.readFile('../datos/sigloDib.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error leyendo el archivo JSON' });
-        }
-        res.json(JSON.parse(data));
-    });
-});
-
-app.get('/api/sigloPin', async (req, res) => {
-    fs.readFile('../datos/sigloPin.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error leyendo el archivo JSON' });
-        }
-        return res.json(JSON.parse(data));
-    });
-});
-
-app.get('/api/culturaDib', async (req, res) => {
-    fs.readFile('../datos/culturaDib.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error leyendo el archivo JSON' });
-        }
-        return res.json(JSON.parse(data));
-    });
-});
-
-app.get('/api/culturaPin', async (req, res) => {
-    fs.readFile('../datos/culturaPin.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error leyendo el archivo JSON' });
-        }
-        return res.json(JSON.parse(data));
-    });
-});
-
-app.get('/api/tipoTrabajoDib', async (req, res) => {
-    fs.readFile('../datos/tipoTrabajoDib.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error leyendo el archivo JSON' });
-        }
-        return res.json(JSON.parse(data));
-    });
-});
-
-app.get('/api/tipoTrabajoPin', async (req, res) => {
-    fs.readFile('../datos/tipoTrabajoPin.json', 'utf8', (err, data) => {
-        if (err) {
-            return res.status(500).json({ error: 'Error leyendo el archivo JSON' });
-        }
-        return res.json(JSON.parse(data));
-    });
-});
 
 async function init() {
     do {

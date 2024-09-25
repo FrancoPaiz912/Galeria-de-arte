@@ -59,6 +59,7 @@ export function updateApiUri(params) {
         }
     }
     setURL(url.toString());
+    console.log(currentUri);
 
     return currentUri;
 }

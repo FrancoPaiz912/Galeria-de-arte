@@ -10,15 +10,17 @@ export function updatePagination(paginasTotales) {
     let paginationHtml = '<div class="pagination">'; // Wrap everything in a pagination container
 
     // Add First and Previous buttons
-    paginationHtml += `<a href="#" class="prev ${currentPage <= 1 ? 'disabled' : ''}" data-page="1">&lt;&lt;</a>`;
-    paginationHtml += `<a href="#" class="prev ${currentPage <= 1 ? 'disabled' : ''}" data-page="${currentPage - 1}">&lt;</a>`;
+    // Use 'visibility: hidden' instead of 'display: none' to preserve space
+    paginationHtml += `<a href="#" class="prev" data-page="1" style="visibility: ${currentPage <= 1 ? 'hidden' : 'visible'};">&lt;&lt;</a>`;
+    paginationHtml += `<a href="#" class="prev" data-page="${currentPage - 1}" style="visibility: ${currentPage <= 1 ? 'hidden' : 'visible'};">&lt;</a>`;
 
     // Add Current Page
     paginationHtml += `<div class="page-numbers"><a href="#" class="active" data-page="${currentPage}">${currentPage}</a></div>`;
 
     // Add Next and Last buttons
-    paginationHtml += `<a href="#" class="next ${currentPage >= totalPages ? 'disabled' : ''}" data-page="${currentPage + 1}">&gt;</a>`;
-    paginationHtml += `<a href="#" class="next ${currentPage >= totalPages ? 'disabled' : ''}" data-page="${totalPages}">&gt;&gt;</a>`;
+    // Use 'visibility: hidden' instead of 'display: none' to preserve space
+    paginationHtml += `<a href="#" class="next" data-page="${currentPage + 1}" style="visibility: ${currentPage >= totalPages ? 'hidden' : 'visible'};">&gt;</a>`;
+    paginationHtml += `<a href="#" class="next" data-page="${totalPages}" style="visibility: ${currentPage >= totalPages ? 'hidden' : 'visible'};">&gt;&gt;</a>`;
 
     paginationHtml += '</div>'; // Close the pagination container
 
@@ -104,9 +106,63 @@ export function opcionesFiltros(opciones, select) { //Vista
     });
 }
 
+export function botonResetSearch() {
+    // Resetear el input de búsqueda
+    document.getElementById('search-input').value = '';
+
+    // Resetear los selectores de filtro al valor "Todos"
+    document.getElementById('filtro-Clasificacion').value = '21|26'; // Clasificación
+    document.getElementById('filtro-Cultura').value = ''; // Cultura
+    document.getElementById('filtro-Siglo').value = ''; // Siglo
+    document.getElementById('filtro-Tipo-Trabajo').value = ''; // Tipo de trabajo
+
+        // Actualizar el parámetro q con el nuevo string de búsqueda
+        updateApiUri({ q: '', page: '', classification: '21|26', culture: '', century: '',  worktype:'' });
+    
+        // Llamar a updateContent con la URI actualizada
+        generarContenedor('card-template', '#card-container');
+}
+
+export function insertHeaderNavFooter(headerNavId, footerId, callback) {
+    fetchTemplate(headerNavId, function(headerNavTemplate) {
+        $('body').prepend(headerNavTemplate);
+
+        $('header h1').text($('title').text());
+        
+        fetchTemplate(footerId, function(footerTemplate) {
+            $('body').append(footerTemplate);
+            
+            // Llama al callback después de cargar ambos templates
+            if (typeof callback === 'function') callback();
+        });
+    });
+}
+
+export function notificacion(message) {
+    // Verificar si el contenedor de notificación ya existe
+    if ($('#notification').length === 0) {
+        // Crear el div de notificación y agregarlo al body
+        $('body').append('<div class="notification" id="notification"></div>');
+    }
+    console.log(message);
+
+    // Colocar el mensaje dentro del contenedor de notificación
+    $('#notification').text(message);
+
+    // Mostrar la caja de notificación
+    $('#notification').fadeIn();
+
+    // Hacer que desaparezca después de 6 segundos
+    setTimeout(function() {
+        $('#notification').fadeOut();
+    }, 6000);
+}
+
 export default{
     updatePagination,
     opcionesFiltros,
     fetchAndPopulateTemplate,
-
+    insertHeaderNavFooter,
+    notificacion,
+    botonResetSearch
 }

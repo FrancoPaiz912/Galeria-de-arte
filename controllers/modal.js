@@ -1,5 +1,6 @@
 import {abrirModal} from '../views/modal.js';
 import {updateApiUri, mappedObjects, generarContenedor} from '../controllers/principal.js';
+import {insertHeaderNavFooter, botonResetSearch,notificacion} from '../views/contenidoDinamico.js'
 
 $(document).on('click', '.contenedor-tarjeta', function() {
     // Obtener los datos del elemento clickeado
@@ -25,3 +26,25 @@ export function getObjectMapper(id){
     console.log(encontrado);
     return encontrado;
 };
+
+$(document).ready(function() {
+    // Carga header, nav y footer
+    insertHeaderNavFooter('header-nav-template', 'footer-template', function() {
+        // Este código se ejecuta después de que ambos templates han sido insertados
+
+        // Oculta el nav al cargar la página 
+        $('#nav-menu').hide(); 
+
+        // Alterna la visibilidad del menú al hacer clic en el botón
+        $('#menu-toggle').click(function() { 
+            $('#nav-menu').slideToggle(); 
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtener la imagen de reset y añadir el event listener
+    const resetButton = document.getElementById('reset-busqueda');
+    
+    resetButton.addEventListener('click', botonResetSearch);
+});
