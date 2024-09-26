@@ -27,6 +27,35 @@
     </div>
 </template>
 
+<template id="carrito-modal-card-template">
+    <div id="modal-tarjeta" class="modal">
+        <div class="modal-contenido">
+            <div class="titulo-contenedor">
+                <h3 class="modal-titulo">{{title}}</h3>
+                <img src="../img/basicas/cruz.png" class="cerrar-modal" />
+            </div>
+            <span class="artista">{{people}}</span>
+            <div class="contenedor-imagen-modal">
+                <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
+                <div class="compartir-coleccionar">
+                    <div class="izquierda"><a href="Compartir.html?id={{id}}">Compartir <img src="/img/basicas/compartir.png" /></a></div>
+                    <div class="separador"></div>
+                    <div class="derecha">Coleccionar <img src="/img/basicas/coleccion.png" /></div>
+                </div>
+            </div>
+            <div id="detalles-modal">
+                <hr>
+                <div class="contenedor-caracteristica"><span
+                        class="nombre-caracteristica">Clasificación:{{classification}}</span></div>
+                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Siglo:{{century}}</span>
+                </div>
+                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Cultura:{{culture}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
 <template id="modal-card-template">
     <div id="modal-tarjeta" class="modal">
         <div class="modal-contenido">
@@ -38,9 +67,9 @@
             <div class="contenedor-imagen-modal">
                 <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
                 <div class="compartir-coleccionar">
-                    <div class="izquierda">Compartir</div>
+                    <div class="izquierda"><a href="Compartir.html?id={{id}}">Compartir <img src="/img/basicas/compartir.png" /></a></div>
                     <div class="separador"></div>
-                    <div class="derecha">Coleccionar</div>
+                    <div class="derecha"><img src="/img/basicas/coleccion.png" /> Coleccionar</div>
                 </div>
             </div>
             <div class="contenedor-opciones-compra">
@@ -81,36 +110,6 @@
         </div>
     </div>
 </template>
-
-<template id="carrito-modal-card-template">
-    <div id="modal-tarjeta" class="modal">
-        <div class="modal-contenido">
-            <div class="titulo-contenedor">
-                <h3 class="modal-titulo">{{title}}</h3>
-                <img src="../img/basicas/cruz.png" class="cerrar-modal" />
-            </div>
-            <span class="artista">{{people}}</span>
-            <div class="contenedor-imagen-modal">
-                <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
-                <div class="compartir-coleccionar">
-                    <div class="izquierda">Compartir</div>
-                    <div class="separador"></div>
-                    <div class="derecha">Coleccionar</div>
-                </div>
-            </div>
-            <div id="detalles-modal">
-                <hr>
-                <div class="contenedor-caracteristica"><span
-                        class="nombre-caracteristica">Clasificación:{{classification}}</span></div>
-                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Siglo:{{century}}</span>
-                </div>
-                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Cultura:{{culture}}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
-
 <template id="header-nav-template">
     <header class="grid-template">
         <div class="contenedor-logo"><img src="../img/basicas/logo-negro.png" /></div>
@@ -133,4 +132,66 @@
     <footer>
         <p>2024 ImprimiblesMP. Todos los derechos reservados.</p>
     </footer>
+</template>
+
+<template id="al-pedo">
+    <div class="resultado-compartido">
+        <div class="titulo-contenedor"></div>
+        <h3 class="modal-titulo">One of 12 drawings</h3>
+    </div>
+    <span class="artista">No artist</span>
+    <div class="contenedor-imagen-modal">
+        <img src="https://ids.lib.harvard.edu/ids/view/18757365" alt="{{title}}" class="imagen-modal" />
+    </div>
+    <div class="card-box">
+        <div class="top-section">
+            <div class="opcion-tamano mediano seleccionado" data-size="mediano">Chico</div>
+        </div>
+        <div class="price-section">
+            <div id="detalles-mediano" class="detalles-tamano" style="display: block;">
+                <span class="dimenciones-modal">14.6 x 21.1 cm (5 3/4 x 8 5/16 in.)</span>
+                <span class="precio-modal">$ 6000.00</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-box">
+        <div class="top-section">
+            <div class="opcion-tamano mediano seleccionado" data-size="mediano">Mediano</div>
+        </div>
+        <div class="price-section">
+            <div id="detalles-mediano" class="detalles-tamano" style="display: block;">
+                <span class="dimenciones-modal">14.6 x 21.1 cm (5 3/4 x 8 5/16 in.)</span>
+                <span class="precio-modal">$ 9000.00</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-box">
+        <div class="top-section">
+            <div class="opcion-tamano mediano seleccionado" data-size="mediano">Grande</div>
+        </div>
+        <div class="price-section">
+            <div id="detalles-mediano" class="detalles-tamano" style="display: block;">
+                <span class="dimenciones-modal">14.6 x 21.1 cm (5 3/4 x 8 5/16 in.)</span>
+                <span class="precio-modal">$ 12000.00</span>
+            </div>
+        </div>
+    </div>
+    <div id="detalles-modal">
+        <hr>
+        <div class="contenedor-caracteristica"><span
+                class="nombre-caracteristica">Clasificación:{{classification}}</span></div>
+        <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Siglo:{{century}}</span>
+        </div>
+        <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Cultura:{{culture}}</span>
+        </div>
+    </div>
+</template>
+<template id="resultado-compartido-template">
+    <div class="titulo-contenedor">
+        <h3 class="modal-titulo">One of 12 drawings</h3>
+    </div>
+    <span class="artista">No artist</span>
+    <div class="contenedor-imagen-modal">
+        <img src="https://ids.lib.harvard.edu/ids/view/18757365" alt="{{title}}" class="imagen-modal" />
+    </div>
 </template>

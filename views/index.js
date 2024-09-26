@@ -6,7 +6,7 @@ const containerId = '#card-container';
 generarContenedor(templateId, containerId);
 
 export function botonResetSearch() {
-
+    
     document.getElementById('search-input').value = '';
     
     document.getElementById('filtro-Clasificacion').value = '21|26'; 

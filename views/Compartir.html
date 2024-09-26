@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="principal.css" rel="stylesheet" />
+    <title>Compartir</title>
+</head>
+
+<body>
+    <div id="contenedor-modal"></div>
+    <main>
+        <div class="resultado-compartido">
+
+            </div>
+
+            <form class="formulario_general encuesta" id="encuesta" method="GET">
+                <label for="emailEmisor">Email emisor</label> <span class="campo_requerido">*</span><br>
+                <input type="text" id="emailEmisor" name="emailEmisor"><br><br>
+
+                <label for="emailReceptor">Email receptor</label> <span class="campo_requerido">*</span><br>
+                <input type="text" id="emailReceptor" name="emailReceptor"><br><br>
+
+                <label for="comentario">Comentario:</label><br>
+                <textarea id="comentario" name="comentario" rows="4" cols="10"></textarea><br><br>
+
+                <div class="botones">
+                    <button type="submit" class="botonEnviar">Enviar</button>
+                    <button type="button" class="botonCancelar"
+                        onclick="window.location.href='Index.html'">Cancelar</button>
+                    <button type="button" class="botonReset" onclick="resetForm()">Reset</button>
+                </div>
+            </form>
+
+
+
+    </main>
+</body>
+<script src="Compartir.js" type="module"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="../views/contenidoDinamico.js" type="module"></script>
+<script src="../views/modal.js" type="module"></script>
+<script src="../controllers/modal.js" type="module"></script>
+<script src="../controllers/filtros.js" type="module"></script>
+
+</html>
