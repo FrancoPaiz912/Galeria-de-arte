@@ -2,7 +2,6 @@ import {cargarFiltrosDibujos, cargarFiltrosPinturas } from '../Models/filtros.js
 import {opcionesFiltros} from '../views/contenidoDinamico.js';
 import {updateApiUri} from '../controllers/principal.js';
 import {generarContenedor} from '../controllers/principal.js';
-import {updateContent} from '../Models/llamadas.js';
 
 $(window).on('load', async function () {
     const filtrosdib = await cargarFiltrosDibujos();

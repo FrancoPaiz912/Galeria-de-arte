@@ -23,7 +23,6 @@ $(document).on('click', '.page-numbers a', function(e) {
 
 export function getObjectMapper(id){
     const encontrado = mappedObjects.find(objeto => String(objeto.id) === String(id));
-    console.log(encontrado);
     return encontrado;
 };
 
