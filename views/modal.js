@@ -70,8 +70,7 @@ export async function abrirModal(id, templateId) {
         const boton = $('.buy-section');
         // Configura el evento click en el botón de compra
         boton.on("click", function () {
-        // Recupera los objetos guardados del localStorage o inicializa un array vacío
-        notificacion("Ariculo agregada al carrito");
+                    // Recupera los objetos guardados del localStorage o inicializa un array vacío
         let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
        
         console.log("Objetos guardados:", objetosGuardados);
@@ -92,9 +91,9 @@ export async function abrirModal(id, templateId) {
             console.log("Precio obtenido:", precio); // Para debug
             console.log(objetosGuardados);
             const objeto = objetosGuardados.find(obra => obra.id === id & obra.dimension === dimension);
-            
+
             if (objeto) {
-                objeto.cantidad += 1; 
+                objeto.cantidad += 1;
             } else {
                 const nuevaObra = {
                     id: id,
@@ -102,9 +101,9 @@ export async function abrirModal(id, templateId) {
                     dimension: dimension,
                     cantidad: 1
                 };
-                objetosGuardados.push(nuevaObra); 
+                objetosGuardados.push(nuevaObra);
             }
-    
+
             localStorage.setItem('carrito', JSON.stringify(objetosGuardados));
 
         });
