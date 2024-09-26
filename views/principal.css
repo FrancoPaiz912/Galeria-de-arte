@@ -191,7 +191,7 @@ select {
   color: green;
   font-size: 1.6em;
   font-weight: bold;
-  padding-top: 0.5em;
+  padding: 0.5em 0;
   display: block;
 }
 
@@ -230,7 +230,7 @@ select {
 }
 
 .artista {
-  font-size: 0.7em;
+  font-size: 0.9em;
 }
 
 .cerrar-modal {
@@ -313,7 +313,6 @@ body.modal-abierto {
 .buy-section {
   text-align: center;
   font-size: 1.2em;
-  background-color: #28a745;
   border-top: 1px solid #ddd;
 }
 
@@ -327,6 +326,7 @@ body.modal-abierto {
   cursor: pointer;
   font-size: 1em;
   transition: background-color 0.3s;
+  font-weight: bold;
 }
 
 .buy-section button:hover {
@@ -469,4 +469,65 @@ iframe {
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   display: none;
   z-index: 1000;
+}
+
+/* pagina carrito */
+.tamaño {
+  font-weight: bold;
+}
+
+.contenedor-finalizar-compra {
+  margin: 1em 0;
+  padding: 0.5em;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+}
+
+.contenedor-finalizar-compra p {
+  font-size: 1.5em;
+  padding-bottom: 0.5em;
+}
+
+.total-precio {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5em;
+  padding-bottom: 0.5em;
+}
+
+.total-text {
+  font-weight: normal;
+}
+
+#precio-final {
+  font-weight: bold;
+  color: green;
+}
+
+.quitar-contenedor
+{
+  padding: 1em 2em;
+}
+
+.cantidad-botones {
+  display: flex;
+  justify-content: space-between; /* Alinea la cantidad a la izquierda y los botones a la derecha */
+  align-items: center; /* Centra verticalmente los elementos */
+  padding: 1em 1em;
+  height: 2em;
+}
+
+.cantidad{
+  font-size: 1.5em;
+}
+
+.tamano{
+  font-size: 1.5em;
+  padding: 0.5em;
+}
+.botones-mas-menos img{
+  height: 1.75em;
+  padding-left: 0.5em;
 }
