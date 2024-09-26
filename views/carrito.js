@@ -4,7 +4,7 @@ import { generarContenedor } from '../controllers/principal.js';
 $(document).ready(async function () {
     let arrayIds = [];
 
-    let objetosGuardados = JSON.parse(localStorage.getItem('objetos')) || [];
+    let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
 
     objetosGuardados.forEach(objeto => {
         arrayIds.push(objeto.id);
@@ -12,7 +12,7 @@ $(document).ready(async function () {
     let ids = arrayIds.join('|');
     await getListId(ids);
     await generarContenedor('carrito-card-template', '#card-container', async function (mappedData) {
-        let objetosGuardados = JSON.parse(localStorage.getItem('objetos')) || [];
+        let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
         let objetosMappeados = [];
 
         objetosGuardados.forEach(objeto => {

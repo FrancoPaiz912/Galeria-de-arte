@@ -21,12 +21,12 @@ $(document).ready(function () {
 });
 
 
-export async function abrirModal(id) {
+export async function abrirModal(id, templateId) {
     console.log("id del objeto buscado: " + id);
 
     let mappedData = await getObjectMapper(id);
     console.log(mappedData);
-    await fetchAndPopulateTemplate('modal-card-template', '#contenedor-modal', mappedData);
+    await fetchAndPopulateTemplate(templateId, '#contenedor-modal', mappedData);
 
     // Obtener el modal ya insertado en el DOM
     const $modal = $('#modal-tarjeta');
@@ -70,7 +70,7 @@ export async function abrirModal(id) {
         // Configura el evento click en el botón de compra
         boton.on("click", function () {
                     // Recupera los objetos guardados del localStorage o inicializa un array vacío
-        let objetosGuardados = JSON.parse(localStorage.getItem('objetos')) || [];
+        let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
        
         console.log("Objetos guardados:", objetosGuardados);
     
@@ -89,30 +89,22 @@ export async function abrirModal(id) {
             console.log("Dimensión obtenida:", dimension); // Para debug
             console.log("Precio obtenido:", precio); // Para debug
             console.log(objetosGuardados);
-            // Busca el objeto en objetosGuardados usando id y dimension
             const objeto = objetosGuardados.find(obra => obra.id === id & obra.dimension === dimension);
             
             if (objeto) {
-                // Si el objeto existe, incrementa la cantidad
                 objeto.cantidad += 1; 
-                // console.log("El elemento existe. Nueva cantidad:", objeto.cantidad);
             } else {
-                // Si el objeto no existe, crea un nuevo objeto
                 const nuevaObra = {
                     id: id,
                     precio: precio,
                     dimension: dimension,
                     cantidad: 1
                 };
-                objetosGuardados.push(nuevaObra); // Agregar nuevo objeto al array
-                // console.log("El elemento no existía, se ha agregado.");
+                objetosGuardados.push(nuevaObra); 
             }
     
-            // Guarda la lista actualizada de objetos en localStorage
-            localStorage.setItem('objetos', JSON.stringify(objetosGuardados));
-            // objetosGuardados.forEach(element => {
-            //     console.log(element);
-            // });
+            localStorage.setItem('carrito', JSON.stringify(objetosGuardados));
+
         });
     }
 }
