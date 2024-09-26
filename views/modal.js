@@ -69,30 +69,26 @@ export async function abrirModal(id, templateId) {
         const boton = $('.buy-section');
         // Configura el evento click en el botón de compra
         boton.on("click", function () {
-                    // Recupera los objetos guardados del localStorage o inicializa un array vacío
-        let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
-       
-        console.log("Objetos guardados:", objetosGuardados);
-    
-        // Obtiene la dimensión seleccionada
-        const dimensionSeleccionada = $('.top-section .seleccionado').data('size');
-        console.log("Tamaño seleccionado:", dimensionSeleccionada);
-        
-        // Selecciona el botón de compra y el ID del objeto
-        const id = Number(boton.data('id')); // Asegúrate de convertirlo a número
-    
-        // Obtiene los detalles visibles de dimensión y precio
-        const detalleVisible = $('.detalles-tamano:visible');
-        const dimension = detalleVisible.find('.dimenciones-modal').text().trim(); // Asegúrate de eliminar espacios
-        const precio = detalleVisible.find('.precio-modal').text().trim(); // Asegúrate de eliminar espacios
-            console.log("ID desde el botón:", id); // Para debug
-            console.log("Dimensión obtenida:", dimension); // Para debug
-            console.log("Precio obtenido:", precio); // Para debug
-            console.log(objetosGuardados);
+            // Recupera los objetos guardados del localStorage o inicializa un array vacío
+            let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
+
+            console.log("Objetos guardados:", objetosGuardados);
+
+            // Obtiene la dimensión seleccionada
+            const dimensionSeleccionada = $('.top-section .seleccionado').data('size');
+            console.log("Tamaño seleccionado:", dimensionSeleccionada);
+
+            // Selecciona el botón de compra y el ID del objeto
+            const id = Number(boton.data('id')); // Asegúrate de convertirlo a número
+
+            // Obtiene los detalles visibles de dimensión y precio
+            const detalleVisible = $('.detalles-tamano:visible');
+            const dimension = detalleVisible.find('.dimenciones-modal').text().trim(); // Asegúrate de eliminar espacios
+            const precio = detalleVisible.find('.precio-modal').text().trim(); // Asegúrate de eliminar espacios
             const objeto = objetosGuardados.find(obra => obra.id === id & obra.dimension === dimension);
-            
+
             if (objeto) {
-                objeto.cantidad += 1; 
+                objeto.cantidad += 1;
             } else {
                 const nuevaObra = {
                     id: id,
@@ -100,9 +96,9 @@ export async function abrirModal(id, templateId) {
                     dimension: dimension,
                     cantidad: 1
                 };
-                objetosGuardados.push(nuevaObra); 
+                objetosGuardados.push(nuevaObra);
             }
-    
+
             localStorage.setItem('carrito', JSON.stringify(objetosGuardados));
 
         });
