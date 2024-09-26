@@ -1,8 +1,7 @@
 import {cargarFiltrosDibujos, cargarFiltrosPinturas } from '../Models/filtros.js';
-import {opcionesFiltros} from '../views/contenidoDinamico.js';
+import {opcionesFiltros} from '../views/index.js';
 import {updateApiUri} from '../controllers/principal.js';
 import {generarContenedor} from '../controllers/principal.js';
-import {updateContent} from '../Models/llamadas.js';
 
 $(window).on('load', async function () {
     const filtrosdib = await cargarFiltrosDibujos();
@@ -64,6 +63,12 @@ $(document).ready(function() {
         }, 1000);
     });
 
+    $('#filtro-Clasificacion').on('change', function () {
+        const value = $(this).val();
+        updateApiUri({ q: '', page: '', classification: value, culture: '', century: '',  worktype:'' });
+        generarContenedor('card-template', '#card-container');
+    });
+
     $('#filtro-Cultura').on('change', function () {
         const value = $(this).val();
         updateApiUri({ culture: value, page: '' });
@@ -82,4 +87,6 @@ $(document).ready(function() {
         generarContenedor('card-template', '#card-container');
     });
 });
+
+
 

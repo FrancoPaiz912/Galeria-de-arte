@@ -1,17 +1,19 @@
-import {currentUri, setURL} from '../Models/llamadas.js';
-import {fetchAndPopulateTemplate, updatePagination} from '../views/contenidoDinamico.js';
-import {updateContent} from '../Models/llamadas.js';
+import { currentUri, setURL } from '../Models/llamadas.js';
+import { fetchAndPopulateTemplate, updatePagination } from '../views/contenidoDinamico.js';
+import { updateContent } from '../Models/llamadas.js';
+import {insertHeaderNavFooter} from '../views/contenidoDinamico.js'
 
 let paginasTotales;
 export const mappedObjects = [];
 
 export function mapApiData(apiData) {
     paginasTotales = apiData.info.pages;
+
     mappedObjects.length = 0;
     return apiData.records
         .filter(record => record.hasOwnProperty('primaryimageurl') && record.primaryimageurl !== null)  // Filtrar si primaryimageurl no existe o es null
         .map(record => {
-            
+            const id = record.id;
             const imageUrl = record.primaryimageurl;
             const mappedObject = {
                 imageUrl,
@@ -35,7 +37,10 @@ export function mapApiData(apiData) {
                 url: record.url || 'No URL',
                 priceSmall: 'No price',
                 priceMedium: 'No price',
-                priceLarge: 'No price'
+                priceLarge: 'No price',
+                tamaño: null,
+                cantidad: null,
+                precioXcantidad: null
             };
             mappedObjects.push(mappedObject);
             return mappedObject;
@@ -48,7 +53,7 @@ export function getCurrentPage() {
     return parseInt(pageParam, 10) || 1;  // Return 1 if 'page' parameter is not present
 }
 
-export function updateApiUri(params) { 
+export function updateApiUri(params) {
     const url = new URL(currentUri);
 
     for (const [key, value] of Object.entries(params)) {
@@ -64,12 +69,19 @@ export function updateApiUri(params) {
     return currentUri;
 }
 
-export async function generarContenedor(templateId, containerId){
-    const data = await updateContent(); 
-    const mappedData = mapApiData(data); 
-    console.log('datos retornados: ' + mappedData);
-    fetchAndPopulateTemplate(templateId, containerId, mappedData); 
-    updatePagination(data.info.pages); 
+export async function generarContenedor(templateId, containerId, funcion = (mappedData) => { }) {
+    const data = await updateContent();
+    let mappedData = mapApiData(data);
+
+    if (funcion  && typeof funcion === 'function') {
+        const resultado = await funcion(mappedData); //No quitar este await, por mas que VSCODE diga lo contrario.
+        if (resultado !== undefined) {
+            mappedData = resultado;
+        }
+    }
+
+    fetchAndPopulateTemplate(templateId, containerId, mappedData);
+    updatePagination(data.info.pages);
 }
 
 const params = {
@@ -81,12 +93,28 @@ const params = {
     medium: '',
     yearmade: '',
     classification: '',
-    century: '',    
-    culture: '',    
+    century: '',
+    culture: '',
     worktype: '',
+    id: '',
 };
 
-export default{
+$(document).ready(function() {
+    // Carga header, nav y footer
+    insertHeaderNavFooter('header-nav-template', 'footer-template', function() {
+        // Este código se ejecuta después de que ambos templates han sido insertados
+
+        // Oculta el nav al cargar la página 
+        $('#nav-menu').hide(); 
+
+        // Alterna la visibilidad del menú al hacer clic en el botón
+        $('#menu-toggle').click(function() { 
+            $('#nav-menu').slideToggle(); 
+        });
+    });
+});
+
+export default {
     mapApiData,
     getCurrentPage,
     updateApiUri,

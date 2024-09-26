@@ -1,6 +1,4 @@
-import {getCurrentPage } from '../controllers/principal.js';
-import {updateApiUri} from '../controllers/principal.js';
-import {generarContenedor} from '../controllers/principal.js';
+import {updateApiUri, generarContenedor, getCurrentPage} from '../controllers/principal.js';
 
 export function updatePagination(paginasTotales) {
     const currentPage = getCurrentPage();
@@ -65,7 +63,7 @@ function populateTemplate(template, data) {
         'division', 'colorCount', 'id', 'workTypes', 'imageCount', 
         'classification', 'titlesCount', 'peopleCount', 'medium', 
         'dated', 'people', 'url', 'century', 'priceSmall', 'priceMedium', 
-        'priceLarge', 'culture', 
+        'priceLarge', 'culture', 'tamaño', 'cantidad', 'precioXcantidad'
     ];
 
     placeholders.forEach(key => {
@@ -91,38 +89,6 @@ export async function fetchAndPopulateTemplate(templateId, containerId, jsonData
     });
 }
 
-const templateId = 'card-template';
-const containerId = '#card-container';
-
-generarContenedor(templateId, containerId);
-
-export function opcionesFiltros(opciones, select) { //Vista
-    select.innerHTML = '<option value="">Todos</option>';
-    opciones.forEach(opcion => {
-        const Subfiltro = document.createElement('option');
-        Subfiltro.value = opcion;
-        Subfiltro.textContent = opcion;
-        select.appendChild(Subfiltro);
-    });
-}
-
-export function botonResetSearch() {
-    // Resetear el input de búsqueda
-    document.getElementById('search-input').value = '';
-
-    // Resetear los selectores de filtro al valor "Todos"
-    document.getElementById('filtro-Clasificacion').value = '21|26'; // Clasificación
-    document.getElementById('filtro-Cultura').value = ''; // Cultura
-    document.getElementById('filtro-Siglo').value = ''; // Siglo
-    document.getElementById('filtro-Tipo-Trabajo').value = ''; // Tipo de trabajo
-
-        // Actualizar el parámetro q con el nuevo string de búsqueda
-        updateApiUri({ q: '', page: '', classification: '21|26', culture: '', century: '',  worktype:'' });
-    
-        // Llamar a updateContent con la URI actualizada
-        generarContenedor('card-template', '#card-container');
-}
-
 export function insertHeaderNavFooter(headerNavId, footerId, callback) {
     fetchTemplate(headerNavId, function(headerNavTemplate) {
         $('body').prepend(headerNavTemplate);
@@ -138,11 +104,8 @@ export function insertHeaderNavFooter(headerNavId, footerId, callback) {
     });
 }
 
-
 export default{
     updatePagination,
-    opcionesFiltros,
     fetchAndPopulateTemplate,
     insertHeaderNavFooter,
-    botonResetSearch
 }
