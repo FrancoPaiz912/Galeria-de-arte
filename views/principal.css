@@ -59,6 +59,7 @@ header {
   align-items: center;
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
   padding: 1em;
+  background-color: white;
 }
 
 header h1 {
@@ -490,6 +491,7 @@ iframe {
   border: 1px solid #ccc;
   border-radius: 0.5em;
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+  background-color: white;
 }
 
 .contenedor-finalizar-compra p {
@@ -528,11 +530,10 @@ iframe {
 }
 
 .cantidad{
-  font-size: 1.5em;
+  font-size: 1.3em;
 }
 
 .tamano{
-  font-size: 1.5em;
   padding: 0.5em;
 }
 .botones-mas-menos img{
