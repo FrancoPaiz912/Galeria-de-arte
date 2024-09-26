@@ -1,4 +1,5 @@
 import {generarContenedor, updateApiUri} from '../controllers/principal.js';
+import { notificacion } from '../views/contenidoDinamico.js';
 
 // Función para obtener el parámetro de la URL
 function getParameterByName(name) {
@@ -16,13 +17,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const id = getParameterByName('id');
     console.log("este es el id pasado " + id);
     updateApiUri({id:id});
-    generarContenedor("resultado-compartido-template", "resultado-compartido");
+    generarContenedor("resultado-compartido-template", "#resultado-compartido");
+
 });
 
 document.getElementById('encuesta').addEventListener('submit', function(event) {
     // Prevenir el envío por defecto del formulario
     event.preventDefault();
     console.log("Enviar tocado");
+
 
     // Validar el formulario
     if (!validarFormulario()) {
@@ -33,13 +36,14 @@ document.getElementById('encuesta').addEventListener('submit', function(event) {
     var sender = document.getElementById('emailEmisor').value;
     var recipient = document.getElementById('emailReceptor').value;
     var commentary = document.getElementById('comentario').value;
-    var artist = "No artist";  // Esto podría ser dinámico
-    var title = "One of 12 drawings";  // Esto podría ser dinámico
-    var link = "https://ids.lib.harvard.edu/ids/view/18757365";  // Esto podría ser dinámico
+    var artist = document.getElementById('modal-artist').textContent || "No artist";
+    var title = document.getElementById('modal-title').textContent || "Untitled";
+    var link = "http://127.0.0.1:5501/views/Index.html?id="+getParameterByName('id');  // Esto podría ser dinámico
 
     // Crear el cuerpo y el enlace mailto
     var body = createBody(sender, commentary, artist, title, link);
     var mailtoLink = createMailtoLink(recipient, "Mira lo que esa obra papa", body);
+    console.log(mailtoLink);
 
     // Abrir el enlace mailto
     window.location.href = mailtoLink;
@@ -145,26 +149,4 @@ function validarFormulario() {
     }
 
     return true; // Si no hay errores, permite continuar
-}
-
-
-
-export function notificacion(message) {
-    // Verificar si el contenedor de notificación ya existe
-    if ($('#notification').length === 0) {
-        // Crear el div de notificación y agregarlo al body
-        $('body').append('<div class="notification" id="notification"></div>');
-    }
-    console.log(message);
-
-    // Colocar el mensaje dentro del contenedor de notificación
-    $('#notification').text(message);
-
-    // Mostrar la caja de notificación
-    $('#notification').fadeIn();
-
-    // Hacer que desaparezca después de 6 segundos
-    setTimeout(function() {
-        $('#notification').fadeOut();
-    }, 6000);
 }

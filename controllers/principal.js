@@ -71,6 +71,7 @@ export function updateApiUri(params) {
 
 export async function generarContenedor(templateId, containerId, funcion = (mappedData) => { }) {
     const data = await updateContent();
+    console.log("updateContent");
     let mappedData = mapApiData(data);
 
     if (funcion  && typeof funcion === 'function') {
@@ -119,6 +120,5 @@ export default {
     getCurrentPage,
     updateApiUri,
     mappedObjects,
-    generarContenedor,
-
+    generarContenedor
 }

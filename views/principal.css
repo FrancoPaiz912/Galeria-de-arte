@@ -473,7 +473,7 @@ iframe {
   border-radius: 0.5em;
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.4);
   display: none;
-  z-index: 1000;
+  z-index: 99000;
   font-weight: bold;
   width: 80%; /* Adjust this to make it wider or narrower */
   max-width: 800px; /* Optional: Limit the maximum width */

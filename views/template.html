@@ -188,10 +188,10 @@
 </template>
 <template id="resultado-compartido-template">
     <div class="titulo-contenedor">
-        <h3 class="modal-titulo">One of 12 drawings</h3>
+        <h3 class="modal-titulo" id="modal-title">{{title}}</h3>
     </div>
-    <span class="artista">No artist</span>
+    <span class="artista" id="modal-artist">{{people}}</span>
     <div class="contenedor-imagen-modal">
-        <img src="https://ids.lib.harvard.edu/ids/view/18757365" alt="{{title}}" class="imagen-modal" />
+        <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
     </div>
 </template>

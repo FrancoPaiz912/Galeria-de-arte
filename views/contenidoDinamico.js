@@ -104,8 +104,30 @@ export function insertHeaderNavFooter(headerNavId, footerId, callback) {
     });
 }
 
+export function notificacion(message) {
+    console.log("notificacion: "+message)
+    // Verificar si el contenedor de notificación ya existe
+    if ($('#notification').length === 0) {
+        // Crear el div de notificación y agregarlo al body
+        $('body').append('<div class="notification" id="notification"></div>');
+    }
+    console.log(message);
+
+    // Colocar el mensaje dentro del contenedor de notificación
+    $('#notification').text(message);
+
+    // Mostrar la caja de notificación
+    $('#notification').fadeIn();
+
+    // Hacer que desaparezca después de 6 segundos
+    setTimeout(function() {
+        $('#notification').fadeOut();
+    }, 4000);
+}
+
 export default{
     updatePagination,
     fetchAndPopulateTemplate,
     insertHeaderNavFooter,
+    notificacion,
 }
