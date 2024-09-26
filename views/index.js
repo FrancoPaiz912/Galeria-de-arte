@@ -1,9 +1,28 @@
 import {updateApiUri, generarContenedor} from '../controllers/principal.js';
+import {abrirModal} from '../views/modal.js';
 
 const templateId = 'card-template';
 const containerId = '#card-container';
 
-generarContenedor(templateId, containerId);
+document.addEventListener('DOMContentLoaded', function() {
+
+    const id = getParameterByName('id');
+    console.log("este es el id pasado " + id);
+    if (id != null)
+    {
+        updateApiUri({id:id});
+        generarContenedor(templateId, containerId);
+        abrirModal(id, "modal-card-template");
+    }
+    else
+    {
+        generarContenedor(templateId, containerId);
+    }
+    
+});
+
+
+
 
 export function botonResetSearch() {
 
@@ -28,9 +47,16 @@ export function opcionesFiltros(opciones, select) {
     });
 }
 
+
 document.addEventListener('DOMContentLoaded', function() {
+
     // Obtener la imagen de reset y añadir el event listener
     const resetButton = document.getElementById('reset-busqueda');
     
     resetButton.addEventListener('click', botonResetSearch);
 });
+
+function getParameterByName(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}

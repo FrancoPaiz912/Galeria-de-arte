@@ -1,5 +1,6 @@
 import { getObjectMapper } from '../controllers/modal.js';
-import { fetchAndPopulateTemplate } from '../views/contenidoDinamico.js';
+import { fetchAndPopulateTemplate,notificacion } from '../views/contenidoDinamico.js';
+
 
 $(document).ready(function () {
     $('.opcion-tamano').on('click', function () {
@@ -69,7 +70,8 @@ export async function abrirModal(id, templateId) {
         const boton = $('.buy-section');
         // Configura el evento click en el botón de compra
         boton.on("click", function () {
-                    // Recupera los objetos guardados del localStorage o inicializa un array vacío
+        // Recupera los objetos guardados del localStorage o inicializa un array vacío
+        notificacion("Ariculo agregada al carrito");
         let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
        
         console.log("Objetos guardados:", objetosGuardados);
