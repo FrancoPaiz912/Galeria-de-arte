@@ -6,6 +6,12 @@ const containerId = '#card-container';
 generarContenedor(templateId, containerId);
 
 export function botonResetSearch() {
+
+        // Resetear los selectores de filtro al valor "Todos"
+        document.getElementById('filtro-Clasificacion').value = '21|26'; // Clasificación
+        document.getElementById('filtro-Cultura').value = ''; // Cultura
+        document.getElementById('filtro-Siglo').value = ''; // Siglo
+        document.getElementById('filtro-Tipo-Trabajo').value = ''; // Tipo de trabajo
     
         updateApiUri({ q: '', page: '', classification: '21|26', culture: '', century: '',  worktype:'' });
     
