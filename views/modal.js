@@ -95,7 +95,7 @@ export async function abrirModal(id) {
             if (objeto) {
                 // Si el objeto existe, incrementa la cantidad
                 objeto.cantidad += 1; 
-                console.log("El elemento existe. Nueva cantidad:", objeto.cantidad);
+                // console.log("El elemento existe. Nueva cantidad:", objeto.cantidad);
             } else {
                 // Si el objeto no existe, crea un nuevo objeto
                 const nuevaObra = {
@@ -105,26 +105,15 @@ export async function abrirModal(id) {
                     cantidad: 1
                 };
                 objetosGuardados.push(nuevaObra); // Agregar nuevo objeto al array
-                console.log("El elemento no existía, se ha agregado.");
+                // console.log("El elemento no existía, se ha agregado.");
             }
     
             // Guarda la lista actualizada de objetos en localStorage
             localStorage.setItem('objetos', JSON.stringify(objetosGuardados));
-            objetosGuardados.forEach(element => {
-                console.log(element);
-            });
+            // objetosGuardados.forEach(element => {
+            //     console.log(element);
+            // });
         });
     }
 }
-    
 
-// function calcularDimension(dimension){
-//     if (dimension === "chico"){
-//         return
-//     }else if (dimension === "mediano"){
-
-//     }else if (dimension === "grande"){
-
-//     }
-//     return value;
-// }

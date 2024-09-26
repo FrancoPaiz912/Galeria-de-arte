@@ -7,6 +7,7 @@
         </div>
     </div>
 </template>
+
 <template id="carrito-card-template">
     <div class="contenedor-tarjeta" data-id="{{id}}">
         <img src="{{imageUrl}}" alt="{{title}}" class="imagen-tarjeta">
@@ -25,6 +26,7 @@
         </div>
     </div>
 </template>
+
 <template id="modal-card-template">
     <div id="modal-tarjeta" class="modal">
         <div class="modal-contenido">
@@ -109,60 +111,6 @@
     </div>
 </template>
 
-<template id="modal-card-template">
-    <div id="modal-tarjeta" class="modal">
-        <div class="modal-contenido">
-            <div class="titulo-contenedor">
-                <h3 class="modal-titulo">{{title}}</h3>
-                <img src="../img/basicas/cruz.png" class="cerrar-modal" />
-            </div>
-            <span class="artista">{{people}}</span>
-            <div class="contenedor-imagen-modal">
-                <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
-                <div class="compartir-coleccionar">
-                    <div class="izquierda">Compartir</div>
-                    <div class="separador"></div>
-                    <div class="derecha">Coleccionar</div>
-                </div>
-            </div>
-            <div class="contenedor-opciones-compra">
-                <div class="card-box">
-                    <div class="top-section">
-                        <div class="opcion-tamano chico" data-size="chico">Chico</div>
-                        <div class="opcion-tamano mediano seleccionado" data-size="mediano">Mediano</div>
-                        <div class="opcion-tamano grande" data-size="grande">Grande</div>
-                    </div>
-                    <div class="price-section">
-                        <div id="detalles-chico" class="detalles-tamano" style="display: none;">
-                            <span class="dimenciones-modal">10.0 x 15.0 cm (4 x 6 in.)</span>
-                            <span class="precio-modal">$ 6000.00</span>
-                        </div>
-                        <div id="detalles-mediano" class="detalles-tamano" style="display: block;">
-                            <span class="dimenciones-modal">14.6 x 21.1 cm (5 3/4 x 8 5/16 in.)</span>
-                            <span class="precio-modal">$ 9000.00</span>
-                        </div>
-                        <div id="detalles-grande" class="detalles-tamano" style="display: none;">
-                            <span class="dimenciones-modal">21.0 x 29.7 cm (8 1/4 x 11 3/4 in.)</span>
-                            <span class="precio-modal">$ 12000.00</span>
-                        </div>
-                    </div>
-                    <div class="buy-section">
-                        <button>Comprar</button>
-                    </div>
-                </div>
-            </div>
-            <div id="detalles-modal">
-                <hr>
-                <div class="contenedor-caracteristica"><span
-                        class="nombre-caracteristica">Clasificación:{{classification}}</span></div>
-                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Siglo:{{century}}</span>
-                </div>
-                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Cultura:{{culture}}</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</template>
 <template id="header-nav-template">
     <header class="grid-template">
         <div class="contenedor-logo"><img src="../img/basicas/logo-negro.png" /></div>
