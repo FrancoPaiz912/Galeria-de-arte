@@ -1,5 +1,6 @@
 import { getObjectMapper } from '../controllers/modal.js';
-import { fetchAndPopulateTemplate } from '../views/contenidoDinamico.js';
+import { fetchAndPopulateTemplate,notificacion } from '../views/contenidoDinamico.js';
+
 
 $(document).ready(function () {
     $('.opcion-tamano').on('click', function () {
@@ -90,9 +91,9 @@ export async function abrirModal(id, templateId) {
             console.log("Precio obtenido:", precio); // Para debug
             console.log(objetosGuardados);
             const objeto = objetosGuardados.find(obra => obra.id === id & obra.dimension === dimension);
-            
+
             if (objeto) {
-                objeto.cantidad += 1; 
+                objeto.cantidad += 1;
             } else {
                 const nuevaObra = {
                     id: id,
@@ -100,9 +101,9 @@ export async function abrirModal(id, templateId) {
                     dimension: dimension,
                     cantidad: 1
                 };
-                objetosGuardados.push(nuevaObra); 
+                objetosGuardados.push(nuevaObra);
             }
-    
+
             localStorage.setItem('carrito', JSON.stringify(objetosGuardados));
 
         });
