@@ -1,6 +1,6 @@
 import {abrirModal} from '../views/modal.js';
 import {updateApiUri, mappedObjects, generarContenedor} from '../controllers/principal.js';
-import {insertHeaderNavFooter, botonResetSearch,notificacion} from '../views/contenidoDinamico.js'
+import {insertHeaderNavFooter, botonResetSearch} from '../views/contenidoDinamico.js'
 
 $(document).on('click', '.contenedor-tarjeta', function() {
     // Obtener los datos del elemento clickeado

@@ -42,6 +42,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #eee;
 }
 
 /* Grid Template */
@@ -265,6 +266,10 @@ select {
   cursor: pointer;
 }
 
+.compartir-coleccionar img {
+  height: 1.5em;
+}
+
 .compartir-coleccionar .separador {
   width: 1px;
   background-color: #ccc;
@@ -459,16 +464,19 @@ iframe {
 /* notififaciones*/
 .notification {
   position: fixed;
-  top: 20px;
+  top: 1em;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #4CAF50;
-  color: white;
-  padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+  color: black;
+  padding: 1em;
+  border-radius: 0.5em;
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.4);
   display: none;
   z-index: 1000;
+  font-weight: bold;
+  width: 80%; /* Adjust this to make it wider or narrower */
+  max-width: 800px; /* Optional: Limit the maximum width */
 }
 
 /* pagina carrito */
@@ -530,4 +538,78 @@ iframe {
 .botones-mas-menos img{
   height: 1.75em;
   padding-left: 0.5em;
+}
+
+/* encuesta */
+.campo_requerido {
+  color: red;
+}
+
+.formulario_general input[type="text"],
+.formulario_general input[type="date"],
+.formulario_general select,
+.formulario_general textarea {
+  width: 100%;
+  max-width: 500px;
+  box-sizing: border-box;
+}
+
+.formulario_general input[type="text"],
+.formulario_general input[type="date"],
+.formulario_general select {
+  height: 2em;
+}
+
+.formulario_general {
+  font-weight: bold;
+}
+
+.formulario_general span.campo_requerido {
+  color: red;
+  font-weight: bold;
+}
+
+.formulario_general .botones {
+  display: flex;
+  justify-content: space-between; /* Espacio entre botones */
+}
+
+.botones
+{
+  height: 2.6em;
+}
+.botones button
+{
+  padding: 0.5em;
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 0.5em;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s;
+  font-weight: bold;
+}
+.formulario_general button {
+  font-size: 1.2em;
+  margin-right: 10px;
+}
+
+.encuesta {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 1em 0;
+  box-sizing: border-box;
+}
+
+.botonEnviar {
+  background-color: #218838;
+}
+
+.botonCancelar {
+  background-color: red;
+}
+
+.botonReset {
+  background-color: #555;
 }

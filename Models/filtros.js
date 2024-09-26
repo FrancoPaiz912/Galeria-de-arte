@@ -14,7 +14,6 @@ export async function cargarFiltrosPinturas() {
     const promises = jsonFilesPin.map(file => {
         return new Promise((resolve, reject) => {
             $.getJSON(file, function(data) {
-                console.log('Datos de ' + file + ':', data);
                 $('#json-data').append('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
                 resolve(data);
             }).fail(function() {
@@ -35,7 +34,6 @@ export async function cargarFiltrosDibujos() {
     const promises = jsonFilesDib.map(file => {
         return new Promise((resolve, reject) => {
             $.getJSON(file, function(data) {
-                console.log('Datos de ' + file + ':', data);
                 $('#json-data').append('<pre>' + JSON.stringify(data, null, 2) + '</pre>');
                 resolve(data);
             }).fail(function() {
