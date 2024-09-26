@@ -1,10 +1,27 @@
-<!-- templates.html -->
 <template id="card-template">
     <div class="contenedor-tarjeta" data-id="{{id}}">
         <img src="{{imageUrl}}" alt="{{title}}" class="imagen-tarjeta">
         <div class="contenido-tarjeta">
             <h3 class="titulo-tarjeta">{{title}}</h3>
             <p class="precio">{{price}}</p>
+        </div>
+    </div>
+</template>
+<template id="carrito-card-template">
+    <div class="contenedor-tarjeta" data-id="{{id}}">
+        <img src="{{imageUrl}}" alt="{{title}}" class="imagen-tarjeta">
+        <div class="contenido-tarjeta">
+            <h3 class="titulo-tarjeta">{{title}}</h3>
+            <hr>
+            <p class="tamano">{{tamaño}}</p>
+            <div class="cantidad-botones">
+                <p class="cantidad">Cantidad: {{cantidad}}</p>
+                <div class="botones-mas-menos">
+                    <img id="botonMas" src="/img/basicas/masN.png" />
+                    <img id="botonMenos" src="/img/basicas/menosN.png" />
+                </div>
+            </div>
+            <p class="precio">{{precioXcantidad}}</p>
         </div>
     </div>
 </template>
@@ -52,14 +69,100 @@
             </div>
             <div id="detalles-modal">
                 <hr>
-                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Clasificación:{{classification}}</span></div>
-                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Siglo:{{century}}</span></div>
-                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Cultura:{{culture}}</span></div>
+                <div class="contenedor-caracteristica"><span
+                        class="nombre-caracteristica">Clasificación:{{classification}}</span></div>
+                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Siglo:{{century}}</span>
+                </div>
+                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Cultura:{{culture}}</span>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
+<template id="carrito-modal-card-template">
+    <div id="modal-tarjeta" class="modal">
+        <div class="modal-contenido">
+            <div class="titulo-contenedor">
+                <h3 class="modal-titulo">{{title}}</h3>
+                <img src="../img/basicas/cruz.png" class="cerrar-modal" />
+            </div>
+            <span class="artista">{{people}}</span>
+            <div class="contenedor-imagen-modal">
+                <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
+                <div class="compartir-coleccionar">
+                    <div class="izquierda">Compartir</div>
+                    <div class="separador"></div>
+                    <div class="derecha">Coleccionar</div>
+                </div>
+            </div>
+            <div id="detalles-modal">
+                <hr>
+                <div class="contenedor-caracteristica"><span
+                        class="nombre-caracteristica">Clasificación:{{classification}}</span></div>
+                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Siglo:{{century}}</span>
+                </div>
+                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Cultura:{{culture}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="modal-card-template">
+    <div id="modal-tarjeta" class="modal">
+        <div class="modal-contenido">
+            <div class="titulo-contenedor">
+                <h3 class="modal-titulo">{{title}}</h3>
+                <img src="../img/basicas/cruz.png" class="cerrar-modal" />
+            </div>
+            <span class="artista">{{people}}</span>
+            <div class="contenedor-imagen-modal">
+                <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
+                <div class="compartir-coleccionar">
+                    <div class="izquierda">Compartir</div>
+                    <div class="separador"></div>
+                    <div class="derecha">Coleccionar</div>
+                </div>
+            </div>
+            <div class="contenedor-opciones-compra">
+                <div class="card-box">
+                    <div class="top-section">
+                        <div class="opcion-tamano chico" data-size="chico">Chico</div>
+                        <div class="opcion-tamano mediano seleccionado" data-size="mediano">Mediano</div>
+                        <div class="opcion-tamano grande" data-size="grande">Grande</div>
+                    </div>
+                    <div class="price-section">
+                        <div id="detalles-chico" class="detalles-tamano" style="display: none;">
+                            <span class="dimenciones-modal">10.0 x 15.0 cm (4 x 6 in.)</span>
+                            <span class="precio-modal">$ 6000.00</span>
+                        </div>
+                        <div id="detalles-mediano" class="detalles-tamano" style="display: block;">
+                            <span class="dimenciones-modal">14.6 x 21.1 cm (5 3/4 x 8 5/16 in.)</span>
+                            <span class="precio-modal">$ 9000.00</span>
+                        </div>
+                        <div id="detalles-grande" class="detalles-tamano" style="display: none;">
+                            <span class="dimenciones-modal">21.0 x 29.7 cm (8 1/4 x 11 3/4 in.)</span>
+                            <span class="precio-modal">$ 12000.00</span>
+                        </div>
+                    </div>
+                    <div class="buy-section">
+                        <button>Comprar</button>
+                    </div>
+                </div>
+            </div>
+            <div id="detalles-modal">
+                <hr>
+                <div class="contenedor-caracteristica"><span
+                        class="nombre-caracteristica">Clasificación:{{classification}}</span></div>
+                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Siglo:{{century}}</span>
+                </div>
+                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Cultura:{{culture}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
 <template id="header-nav-template">
     <header class="grid-template">
         <div class="contenedor-logo"><img src="../img/basicas/logo-negro.png" /></div>
@@ -71,7 +174,7 @@
     <nav id="nav-menu" class="bebas-neue-regular">
         <ul>
             <li><a href="Index.html">Buscar</a></li>
-            <li><a href="/carrito.html">Carrito</a></li>
+            <li><a href="Carrito.html">Carrito</a></li>
             <li><a href="Coleccion.html">Colección</a></li>
             <li><a href="Contacto.html">Contacto</a></li>
         </ul>
