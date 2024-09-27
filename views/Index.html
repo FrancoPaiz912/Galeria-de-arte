@@ -8,53 +8,52 @@
     <title>Venta de Impresiones</title>
 </head>
 
-<body> 
+<body>
     <div id="wrapper">
-    <div id="contenedor-modal" data-size="modal-card-template"></div>
-    <main>
-        <div class="contenedor-busqueda">
-            <div class="contenedor-input-busqueda">
-                <input type="text" id="search-input" placeholder="Buscar...">
-                <img src="/img/basicas/reset.256x224.png" id="reset-busqueda" alt="Resetear búsqueda" />
+        <div id="contenedor-modal" data-size="modal-card-template"></div>
+        <main>
+            <div class="contenedor-busqueda">
+                <div class="contenedor-input-busqueda">
+                    <input type="text" id="search-input" placeholder="Buscar...">
+                    <img src="/img/basicas/reset.256x224.png" id="reset-busqueda" alt="Resetear búsqueda" />
+
+                </div>
+                <div class="filtros arvo-regular">
+                    <div class="filtro-categoria grid-template ">
+                        <label for="filtro-Clasificacion">Clasificacion</label>
+                        <select id="filtro-Clasificacion">
+                            <option value="21|26">Todos</option>
+                            <option value="21">Dibujos</option>
+                            <option value="26">Pinturas</option>
+                        </select>
+                    </div>
+                    <div class="filtro-categoria grid-template">
+                        <label for="filtro-Cultura">Cultura</label>
+                        <select id="filtro-Cultura">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <div class="filtro-categoria grid-template">
+                        <label for="filtro-Siglo">Siglo</label>
+                        <select id="filtro-Siglo">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                    <div class="filtro-categoria grid-template">
+                        <label for="filtro-Tipo-Trabajo">Tipo de trabajo</label>
+                        <select id="filtro-Tipo-Trabajo">
+                            <option value="">Todos</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div id="card-container" class="row make-columns">
 
             </div>
-            <div class="filtros arvo-regular">
-                <div class="filtro-categoria grid-template ">
-                    <label for="filtro-Clasificacion">Clasificacion</label>
-                    <select id="filtro-Clasificacion">
-                        <option value="21|26">Todos</option>
-                        <option value="21">Dibujos</option>
-                        <option value="26">Pinturas</option>
-                    </select>
-                </div>
-                <div class="filtro-categoria grid-template">
-                    <label for="filtro-Cultura">Cultura</label>
-                    <select id="filtro-Cultura">
-                        <option value="">Todos</option>
-                    </select>
-                </div>
-                <div class="filtro-categoria grid-template">
-                    <label for="filtro-Siglo">Siglo</label>
-                    <select id="filtro-Siglo">
-                        <option value="">Todos</option>
-                    </select>
-                </div>
-                <div class="filtro-categoria grid-template">
-                    <label for="filtro-Tipo-Trabajo">Tipo de trabajo</label>
-                    <select id="filtro-Tipo-Trabajo">
-                        <option value="">Todos</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div id="card-container" class="row make-columns">
+            <div id="pagination-container"></div>
 
-        </div>
-        <div id="pagination-container"></div>
-
-        </div>
-    </main>
-</div>
+        </main>
+    </div>
 </body>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="../views/contenidoDinamico.js" type="module"></script>

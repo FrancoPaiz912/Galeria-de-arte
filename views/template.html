@@ -35,22 +35,28 @@
                 <img src="../img/basicas/cruz.png" class="cerrar-modal" />
             </div>
             <span class="artista">{{people}}</span>
-            <div class="contenedor-imagen-modal">
-                <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
-                <div class="compartir-coleccionar">
-                    <div class="izquierda"><a href="Compartir.html?id={{id}}">Compartir <img
-                                src="/img/basicas/compartir.png" /></a></div>
-                    <div class="separador"></div>
-                    <div class="derecha">Coleccionar <img src="/img/basicas/coleccion.png" /></div>
+            <div class="contenedor-grid-imagen-datos">
+                <div class="contenedor-imagen-modal">
+                    <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
+                    <div class="compartir-coleccionar">
+                        <div class="izquierda"><a href="Compartir.html?id={{id}}">Compartir <img
+                                    src="/img/basicas/compartir.png" /></a></div>
+                        <div class="separador"></div>
+                        <div class="derecha">Coleccionar <img src="/img/basicas/coleccion.png" /></div>
+                    </div>
                 </div>
-            </div>
-            <div id="detalles-modal">
-                <hr>
-                <div class="contenedor-caracteristica"><span
-                        class="nombre-caracteristica">Clasificación:</span>{{classification}}</div>
-                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Siglo:</span>{{century}}
-                </div>
-                <div class="contenedor-caracteristica"><span class="nombre-caracteristica">Cultura:</span>{{culture}}
+                <div class="contenedor-datos-modal">
+                    <div id="detalles-modal">
+                        <hr>
+                        <div class="contenedor-caracteristica"><span
+                                class="nombre-caracteristica">Clasificación:</span>{{classification}}</div>
+                        <div class="contenedor-caracteristica"><span
+                                class="nombre-caracteristica">Siglo:</span>{{century}}
+                        </div>
+                        <div class="contenedor-caracteristica"><span
+                                class="nombre-caracteristica">Cultura:</span>{{culture}}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
