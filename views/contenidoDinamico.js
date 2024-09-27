@@ -1,4 +1,6 @@
-import {updateApiUri, generarContenedor, getCurrentPage} from '../controllers/principal.js';
+import { updateApiUri, generarContenedor, getCurrentPage } from '../controllers/principal.js';
+import { getListId } from '../controllers/carrito.js';
+import { calculoPrecio } from '../views/carrito.js';
 
 export function updatePagination(paginasTotales) {
     const currentPage = getCurrentPage();
@@ -26,7 +28,7 @@ export function updatePagination(paginasTotales) {
     $('#pagination-container').html(paginationHtml);
 
     // Configure the page number links
-    $('#pagination-container a').on('click', function(e) {
+    $('#pagination-container a').on('click', function (e) {
         e.preventDefault(); // Prevent default link behavior
         const page = $(this).data('page');
         if (page) {
@@ -38,7 +40,7 @@ export function updatePagination(paginasTotales) {
 
 function fetchTemplate(templateId, callback) {
     $.get('template.html')
-        .done(function(templateFile) {
+        .done(function (templateFile) {
             let tempDom = $('<div>').html(templateFile);
             let template = tempDom.find(`#${templateId}`).html();
             if (template) {
@@ -47,7 +49,7 @@ function fetchTemplate(templateId, callback) {
                 console.error('Template not found:', templateId);
             }
         })
-        .fail(function() {
+        .fail(function () {
             console.error('Error fetching template file');
         });
 }
@@ -59,10 +61,10 @@ function populateTemplate(template, data) {
     }
 
     const placeholders = [
-        'imageUrl', 'altText', 'title', 'price', 'classificationId', 
-        'division', 'colorCount', 'id', 'workTypes', 'imageCount', 
-        'classification', 'titlesCount', 'peopleCount', 'medium', 
-        'dated', 'people', 'url', 'century', 'priceSmall', 'priceMedium', 
+        'imageUrl', 'altText', 'title', 'price', 'classificationId',
+        'division', 'colorCount', 'id', 'workTypes', 'imageCount',
+        'classification', 'titlesCount', 'peopleCount', 'medium',
+        'dated', 'people', 'url', 'century', 'priceSmall', 'priceMedium',
         'priceLarge', 'culture', 'tamaño', 'cantidad', 'precioXcantidad'
     ];
 
@@ -77,27 +79,28 @@ function populateTemplate(template, data) {
 
 export async function fetchAndPopulateTemplate(templateId, containerId, jsonData) {
     return new Promise((resolve) => {
-    if (!Array.isArray(jsonData)) {
-        jsonData = [jsonData];
-    }
+        if (!Array.isArray(jsonData)) {
+            jsonData = [jsonData];
+        }
 
-    fetchTemplate(templateId, function(template) {
-        const populatedHtml =  jsonData.map(item => populateTemplate(template, item)).join('');
-        $(containerId).html(populatedHtml);
-         resolve();
-        });
+            fetchTemplate(templateId, function (template) {
+                const populatedHtml = jsonData.map(item => populateTemplate(template, item)).join('');
+                $(containerId).html(populatedHtml);
+                resolve();
+            });
     });
+
 }
 
 export function insertHeaderNavFooter(headerNavId, footerId, callback) {
-    fetchTemplate(headerNavId, function(headerNavTemplate) {
+    fetchTemplate(headerNavId, function (headerNavTemplate) {
         $('body').prepend(headerNavTemplate);
 
         $('header h1').text($('title').text());
-        
-        fetchTemplate(footerId, function(footerTemplate) {
+
+        fetchTemplate(footerId, function (footerTemplate) {
             $('body').append(footerTemplate);
-            
+
             // Llama al callback después de cargar ambos templates
             if (typeof callback === 'function') callback();
         });
@@ -105,7 +108,7 @@ export function insertHeaderNavFooter(headerNavId, footerId, callback) {
 }
 
 export function notificacion(message) {
-    console.log("notificacion: "+message)
+    console.log("notificacion: " + message)
     // Verificar si el contenedor de notificación ya existe
     if ($('#notification').length === 0) {
         // Crear el div de notificación y agregarlo al body
@@ -120,12 +123,48 @@ export function notificacion(message) {
     $('#notification').fadeIn();
 
     // Hacer que desaparezca después de 6 segundos
-    setTimeout(function() {
+    setTimeout(function () {
         $('#notification').fadeOut();
     }, 4000);
 }
 
-export default{
+
+export async function cargarObras(templateId, contenedor, arrayLT) {
+
+    let arrayIds = [];
+
+    let objetosGuardados = JSON.parse(localStorage.getItem(arrayLT)) || [];
+
+    objetosGuardados.forEach(objeto => {
+        arrayIds.push(objeto.id);
+    });
+    let ids = arrayIds.join('|');
+    await getListId(ids);
+    await generarContenedor(templateId, contenedor, async function (mappedData) {
+        let objetosGuardados = JSON.parse(localStorage.getItem(arrayLT)) || [];
+        let objetosMappeados = [];
+
+        objetosGuardados.forEach(objeto => {
+            let objetoOriginal = mappedData.find(obj => obj.id === objeto.id);
+
+            if (objetoOriginal) {
+                let copiaDelObjeto = JSON.parse(JSON.stringify(objetoOriginal));
+                copiaDelObjeto.tamaño = objeto.dimension;
+                copiaDelObjeto.cantidad = objeto.cantidad;
+                copiaDelObjeto.precio = objeto.precio;
+                copiaDelObjeto.precioXcantidad = (parseFloat(objeto.precio.replace('$', '')) * objeto.cantidad).toFixed(2);
+                objetosMappeados.push(copiaDelObjeto);
+            }
+        });
+        return objetosMappeados;
+    });
+    if (arrayLT == "carrito") {
+        calculoPrecio(objetosGuardados);
+    }
+};
+
+
+export default {
     updatePagination,
     fetchAndPopulateTemplate,
     insertHeaderNavFooter,
