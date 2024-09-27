@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         updateApiUri({id:id});
         await generarContenedor(templateId, containerId);
         abrirModal(id, "modal-card-template");
+        botonResetSearch()
     }
     else
     {
@@ -31,7 +32,7 @@ export function botonResetSearch() {
     document.getElementById('filtro-Siglo').value = ''; 
     document.getElementById('filtro-Tipo-Trabajo').value = ''; 
 
-    updateApiUri({ q: '', page: '', classification: '21|26', culture: '', century: '', worktype: '' });
+    updateApiUri({ q: '', page: '', classification: '21|26', culture: '', century: '', worktype: '', id: '' });
 
     generarContenedor('card-template', '#card-container');
 }

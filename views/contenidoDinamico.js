@@ -91,12 +91,12 @@ export async function fetchAndPopulateTemplate(templateId, containerId, jsonData
 
 export function insertHeaderNavFooter(headerNavId, footerId, callback) {
     fetchTemplate(headerNavId, function(headerNavTemplate) {
-        $('body').prepend(headerNavTemplate);
+        $('#wrapper').prepend(headerNavTemplate);
 
         $('header h1').text($('title').text());
         
         fetchTemplate(footerId, function(footerTemplate) {
-            $('body').append(footerTemplate);
+            $('#wrapper').append(footerTemplate);
             
             // Llama al callback después de cargar ambos templates
             if (typeof callback === 'function') callback();

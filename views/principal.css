@@ -42,14 +42,44 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #eee;
+  background-color: #333;
 }
+
+  #wrapper {
+    background-color: #eee;
+  }
 
 /* Grid Template */
 .grid-template {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 1em;
+}
+
+
+.row.make-columns {
+  column-count: 1;
+  /* Four columns */
+  column-gap: 1em;
+  /* Space between columns */
+}
+
+.row.make-columns>div {
+  break-inside: avoid;
+  /* Prevents items from breaking between columns */
+  display: inline-block;
+  /* Ensures items behave as blocks */
+  padding: 0.5rem;
+  width: 100%;
+  /* Ensure items take full width of the column */
+  box-sizing: border-box;
+  /* Include padding in width calculation */
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
+  text-align: center;
+  background-color: #fff;
+  margin-bottom: 0.5em;
+  /* Space between items */
 }
 
 /* Header */
@@ -81,6 +111,7 @@ header h1 {
 .contenedor-titulo {
   grid-column: span 8;
   text-align: center;
+  margin: auto;
 }
 
 .contenedor-barras {
@@ -94,20 +125,25 @@ header img {
 
 /* Navigation */
 
+#nav-menu {
+  display: none;
+}
+
 nav ul {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.5em;
-  padding: 1em 1em 0;
+  padding: 0.5em 1em 0;
 }
 
 nav ul li {
   border: 1px solid #ddd;
   background-color: #f9f9f9;
-  font-size: 1.5em;
+  font-size: 1.2em;
   padding: 0.5em;
   text-align: center;
+  border-radius: 0.5em;
 }
 
 nav ul li a {
@@ -120,6 +156,7 @@ nav ul li a {
 main {
   padding: 0 1em;
 }
+
 /* Search Container */
 .contenedor-busqueda {
   padding: 1em 0 0;
@@ -129,14 +166,18 @@ main {
 .contenedor-input-busqueda {
   display: flex;
   align-items: center;
+  flex-wrap: wrap; /* Allows wrapping */
+  width: 100%; /* Ensure it doesn't exceed the container width */
 }
 
 .contenedor-input-busqueda input {
   flex: 1;
-  padding: 1em;
+  padding: 0.75em;
   border: 1px solid #aaa;
   border-radius: 0.5em 0 0 0.5em;
-  height: 3em;
+  height: 2.5em;
+  min-width: 0; /* Ensures input shrinks with smaller screens */
+  max-width: calc(100% - 3em);
 }
 
 .contenedor-input-busqueda img {
@@ -266,6 +307,13 @@ select {
   font-weight: bold;
   cursor: pointer;
 }
+
+.compartir-coleccionar .izquierda a,
+.compartir-coleccionar .derecha a {
+  text-decoration: none;
+  color: black;
+}
+
 
 .compartir-coleccionar img {
   height: 1.5em;
@@ -476,8 +524,10 @@ iframe {
   display: none;
   z-index: 99000;
   font-weight: bold;
-  width: 80%; /* Adjust this to make it wider or narrower */
-  max-width: 800px; /* Optional: Limit the maximum width */
+  width: 80%;
+  /* Adjust this to make it wider or narrower */
+  max-width: 800px;
+  /* Optional: Limit the maximum width */
 }
 
 /* pagina carrito */
@@ -516,27 +566,29 @@ iframe {
   color: green;
 }
 
-.quitar-contenedor
-{
+.quitar-contenedor {
   padding: 1em 2em;
 }
 
 .cantidad-botones {
   display: flex;
-  justify-content: space-between; /* Alinea la cantidad a la izquierda y los botones a la derecha */
-  align-items: center; /* Centra verticalmente los elementos */
+  justify-content: space-between;
+  /* Alinea la cantidad a la izquierda y los botones a la derecha */
+  align-items: center;
+  /* Centra verticalmente los elementos */
   padding: 1em 1em;
   height: 2em;
 }
 
-.cantidad{
+.cantidad {
   font-size: 1.3em;
 }
 
-.tamano{
+.tamano {
   padding: 0.5em;
 }
-.botones-mas-menos img{
+
+.botones-mas-menos img {
   height: 1.75em;
   padding-left: 0.5em;
 }
@@ -572,15 +624,15 @@ iframe {
 
 .formulario_general .botones {
   display: flex;
-  justify-content: space-between; /* Espacio entre botones */
+  justify-content: space-between;
+  /* Espacio entre botones */
 }
 
-.botones
-{
+.botones {
   height: 2.6em;
 }
-.botones button
-{
+
+.botones button {
   padding: 0.5em;
   width: 100%;
   color: white;
@@ -591,6 +643,7 @@ iframe {
   transition: background-color 0.3s;
   font-weight: bold;
 }
+
 .formulario_general button {
   font-size: 1.2em;
   margin-right: 10px;
@@ -613,4 +666,132 @@ iframe {
 
 .botonReset {
   background-color: #555;
+}
+
+
+@media (min-width: 480px) {
+
+  .row.make-columns {
+    column-count: 2;
+    /* Four columns */
+  }
+
+  header h1 {
+    font-size: 1.8em;
+  }
+
+  header img {
+    max-width: 70%;
+  }
+
+  .contenedor-input-busqueda input {
+    height: 3em;
+    font-size: 1.2em;
+  }
+
+  .contenedor-input-busqueda img {
+    height: 3.5em;
+  }
+
+  .artista {
+    font-size: 1.1em;
+  }
+
+
+
+}
+
+@media (min-width: 650px){
+
+  nav ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .contenedor-barras {
+    display: none;
+  }
+
+  #nav-menu {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+
+  .row.make-columns {
+    column-count: 3;
+    /* Four columns */
+  }
+  .modal-contenido {
+    padding-bottom: 1em;
+  }
+
+  header {
+    height: 115px;
+  }
+
+  .contenedor-logo img {
+    height: 75px;
+  }
+
+  .contenedor-grid-imagen-datos {
+    display: flex;
+    /* Use flexbox to align children */
+    gap: 1em;
+  }
+
+  .contenedor-imagen-modal {
+    flex-grow: 1;
+    /* Allow this element to take the remaining space */
+  }
+
+  .contenedor-datos-modal {
+    min-width: 350px;
+    /* Fixed width for the right element */
+  }
+
+  .card-box {
+    margin-top: 0;
+  }
+}
+@media (min-width: 1024px)
+{
+  .contenedor-imagen-modal img {
+    max-height: 80vh;
+  }
+.modal-contenido
+{
+  max-width: 1024px;
+  margin-top: 1em;
+}
+.filtros
+{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2em;
+}
+.filtro-categoria 
+{
+  grid-column: span 1;
+}
+.filtro-categoria label, select
+{
+  grid-column: span 12;
+}
+.modal-titulo
+{
+  font-size: 1.5em;
+}
+}
+@media (min-width: 1280px)
+{
+  #wrapper {
+    max-width: 1280px;
+    margin:auto;
+    background-color: #eee;
+  }
+  .row.make-columns {
+    column-count: 3;
+    /* Four columns */
+  }
 }

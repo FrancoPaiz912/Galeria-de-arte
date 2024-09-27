@@ -105,9 +105,6 @@ $(document).ready(function() {
     insertHeaderNavFooter('header-nav-template', 'footer-template', function() {
         // Este código se ejecuta después de que ambos templates han sido insertados
 
-        // Oculta el nav al cargar la página 
-        $('#nav-menu').hide(); 
-
         // Alterna la visibilidad del menú al hacer clic en el botón
         $('#menu-toggle').click(function() { 
             $('#nav-menu').slideToggle(); 
