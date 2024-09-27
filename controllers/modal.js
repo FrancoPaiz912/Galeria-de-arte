@@ -4,8 +4,7 @@ import {updateApiUri, mappedObjects, generarContenedor} from '../controllers/pri
 
 $(document).on('click', '.contenedor-tarjeta', function() {
     // Obtener los datos del elemento clickeado
-    const id = $(this).attr('data-id'); // Obtener el 'data-id' directamente del contenedor
-
+    const id = $(this).attr('data-id'); 
     let templateId = $('#contenedor-modal').data('size');
     abrirModal(id, templateId);
 });
