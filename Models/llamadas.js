@@ -1,4 +1,4 @@
-export let currentUri = 'https://api.harvardartmuseums.org/object?hasimage=1&apikey=5003baa9-f734-4f2e-8651-9adae8ce6b0b&sort=rank&sortorder=asc&classification=21|26';
+export let currentUri = 'https://api.harvardartmuseums.org/object?size=15&hasimage=1&apikey=5003baa9-f734-4f2e-8651-9adae8ce6b0b&sort=rank&sortorder=asc&classification=21|26';
 
 export async function updateContent(uri = currentUri) { 
     try {

@@ -1,7 +1,7 @@
 import { currentUri, setURL } from '../Models/llamadas.js';
 import { fetchAndPopulateTemplate, updatePagination } from '../views/contenidoDinamico.js';
 import { updateContent } from '../Models/llamadas.js';
-import {insertHeaderNavFooter} from '../views/contenidoDinamico.js'
+import { insertHeaderNavFooter } from '../views/contenidoDinamico.js'
 
 let paginasTotales;
 export const mappedObjects = [];
@@ -15,6 +15,13 @@ export function mapApiData(apiData) {
         .map(record => {
             const id = record.id;
             const imageUrl = record.primaryimageurl;
+            // Obtener el ancho y alto de la primera imagen si está disponible
+            let width = null;
+            let height = null;
+            if (record.images && record.images.length > 0) {
+                width = record.images[0].width || null;
+                height = record.images[0].height || null;
+            }
             const mappedObject = {
                 imageUrl,
                 title: record.title || 'No title',
@@ -40,9 +47,13 @@ export function mapApiData(apiData) {
                 priceLarge: 'No price',
                 tamaño: null,
                 cantidad: null,
-                precioXcantidad: null
+                precioXcantidad: null,
+                height: height,  // Asignar la altura
+                width: width,     // Asignar el ancho
+                aspectRatio: width/height
             };
             mappedObjects.push(mappedObject);
+            console.log(mappedObject);
             return mappedObject;
         });
 }
@@ -74,7 +85,7 @@ export async function generarContenedor(templateId, containerId, funcion = (mapp
     console.log("updateContent");
     let mappedData = mapApiData(data);
 
-    if (funcion  && typeof funcion === 'function') {
+    if (funcion && typeof funcion === 'function') {
         const resultado = await funcion(mappedData); //No quitar este await, por mas que VSCODE diga lo contrario.
         if (resultado !== undefined) {
             mappedData = resultado;
@@ -100,14 +111,14 @@ const params = {
     id: '',
 };
 
-$(document).ready(function() {
+$(document).ready(function () {
     // Carga header, nav y footer
-    insertHeaderNavFooter('header-nav-template', 'footer-template', function() {
+    insertHeaderNavFooter('header-nav-template', 'footer-template', function () {
         // Este código se ejecuta después de que ambos templates han sido insertados
 
         // Alterna la visibilidad del menú al hacer clic en el botón
-        $('#menu-toggle').click(function() { 
-            $('#nav-menu').slideToggle(); 
+        $('#menu-toggle').click(function () {
+            $('#nav-menu').slideToggle();
         });
     });
 });

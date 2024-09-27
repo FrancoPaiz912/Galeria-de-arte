@@ -6,6 +6,12 @@ export function updatePagination(paginasTotales) {
     const currentPage = getCurrentPage();
     const totalPages = paginasTotales;
 
+    // Check if total pages is 1, if so, hide the pagination div
+    if (totalPages === 1) {
+        $('#pagination-container').html('<div class="pagination" style="display: none;"></div>');
+        return; // No need to generate pagination for single page
+    }
+
     // Create pagination HTML
     let paginationHtml = '<div class="pagination">'; // Wrap everything in a pagination container
 
@@ -37,6 +43,7 @@ export function updatePagination(paginasTotales) {
         }
     });
 }
+
 
 function fetchTemplate(templateId, callback) {
     $.get('template.html')
@@ -86,6 +93,19 @@ export async function fetchAndPopulateTemplate(templateId, containerId, jsonData
             fetchTemplate(templateId, function (template) {
                 const populatedHtml = jsonData.map(item => populateTemplate(template, item)).join('');
                 $(containerId).html(populatedHtml);
+                jsonData.forEach(item => {
+                    if (item.imageUrl && item.aspectRatio) {
+                        const imgElement = $(`${containerId} img[src*='${item.imageUrl}']`);
+                        if (imgElement.length > 0) {
+                            // Obtener el ancho actual de la imagen (esto puede cambiar según la responsividad)
+                            const imageWidth = imgElement.width();
+                            // Calcular la altura usando el aspectRatio
+                            const imageHeight = imageWidth / item.aspectRatio;
+                            // Aplicar la altura a la imagen
+                            imgElement.css('aspect-ratio', `${item.aspectRatio}`);
+                        }
+                    }
+                });
                 resolve();
             });
     });

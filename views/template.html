@@ -1,6 +1,6 @@
 <template id="card-template">
     <div class="contenedor-tarjeta" data-id="{{id}}">
-        <img src="{{imageUrl}}" alt="{{title}}" class="imagen-tarjeta">
+        <img src="{{imageUrl}}?width=450" alt="{{title}}" class="imagen-tarjeta imagenApi">
         <div class="contenido-tarjeta">
             <h3 class="titulo-tarjeta">{{title}}</h3>
             <p class="precio">{{price}}</p>
@@ -10,7 +10,7 @@
 
 <template id="carrito-card-template">
     <div class="contenedor-tarjeta" data-id="{{id}}" data-size="{{tamaño}}">
-        <img src="{{imageUrl}}" alt="{{title}}" class="imagen-tarjeta">
+        <img src="{{imageUrl}}?width=450" alt="{{title}}" class="imagen-tarjeta imagenApi">
         <div class="contenido-tarjeta">
             <h3 class="titulo-tarjeta">{{title}}</h3>
             <hr>
@@ -37,7 +37,7 @@
             <span class="artista">{{people}}</span>
             <div class="contenedor-grid-imagen-datos">
                 <div class="contenedor-imagen-modal">
-                    <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
+                    <img src="{{imageUrl}}?width=900" alt="{{title}}" class="imagen-modal imagenApi" />
                     <div class="compartir-coleccionar">
                         <div class="izquierda"><a href="Compartir.html?id={{id}}">Compartir <img
                                     src="/img/basicas/compartir.png" /></a></div>
@@ -73,7 +73,7 @@
             <span class="artista">{{people}}</span>
             <div class="contenedor-grid-imagen-datos">
                 <div class="contenedor-imagen-modal">
-                    <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
+                    <img src="{{imageUrl}}?width=900" alt="{{title}}" class="imagen-modal imagenApi" />
                     <div class="compartir-coleccionar">
                         <div class="izquierda"><a href="Compartir.html?id={{id}}">Compartir <img
                                     src="/img/basicas/compartir.png" /></a></div>
@@ -134,10 +134,10 @@
     </header>
     <nav id="nav-menu" class="bebas-neue-regular">
         <ul>
-            <li><a href="Index.html">Buscar</a></li>
-            <li><a href="Carrito.html">Carrito</a></li>
-            <li><a href="Coleccion.html">Colección</a></li>
-            <li><a href="Contacto.html">Contacto</a></li>
+            <a href="Index.html"><li>Buscar</li></a>
+            <a href="Carrito.html"><li>Carrito</li></a>
+            <a href="Coleccion.html"><li>Colección</li></a>
+            <a href="Contacto.html"><li>Contacto</li></a>
         </ul>
     </nav>
 </template>
@@ -206,6 +206,6 @@
     </div>
     <span class="artista" id="modal-artist">{{people}}</span>
     <div class="contenedor-imagen-modal">
-        <img src="{{imageUrl}}" alt="{{title}}" class="imagen-modal" />
+        <img src="{{imageUrl}}?width=900" alt="{{title}}" class="imagen-modal imagenApi" />
     </div>
 </template>

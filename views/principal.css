@@ -7,6 +7,7 @@
   padding: 0;
 }
 
+
 html {
   scroll-behavior: smooth;
 }
@@ -33,6 +34,10 @@ select {
 body,
 html {
   height: 100%;
+}
+
+.imagenApi {
+  background-color: #888;
 }
 
 /* General Styles */
@@ -63,23 +68,23 @@ body {
   /* Space between columns */
 }
 
-.row.make-columns>div {
-  break-inside: avoid;
-  /* Prevents items from breaking between columns */
-  display: inline-block;
-  /* Ensures items behave as blocks */
+.row.make-columns > div {
+  break-inside: avoid; /* Prevents items from breaking between columns */
+  display: inline-block; /* Ensures items behave as blocks */
   padding: 0.5rem;
-  width: 100%;
-  /* Ensure items take full width of the column */
-  box-sizing: border-box;
-  /* Include padding in width calculation */
+  width: 100%; /* Ensure items take full width of the column */
+  box-sizing: border-box; /* Include padding in width calculation */
   border: 1px solid #ccc;
   border-radius: 0.5em;
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
   text-align: center;
   background-color: #fff;
-  margin-bottom: 0.5em;
-  /* Space between items */
+  margin-bottom: 0.5em; /* Space between items */
+  transition: box-shadow 0.3s ease; /* Agrega transición para la sombra */
+}
+
+.row.make-columns > div:hover {
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.5); /* Sombra más grande y oscura al hacer hover */
 }
 
 /* Header */
@@ -146,7 +151,7 @@ nav ul li {
   border-radius: 0.5em;
 }
 
-nav ul li a {
+nav ul a {
   text-decoration: none;
   color: #1560bd;
 }
@@ -217,7 +222,9 @@ select {
   grid-column: span 12;
   margin-top: 0.5em;
   padding-bottom: 0.5em;
+  cursor: pointer;
 }
+
 
 .imagen-tarjeta {
   width: 100%;
