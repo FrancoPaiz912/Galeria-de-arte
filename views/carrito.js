@@ -1,36 +1,11 @@
-import { getListId } from '../controllers/carrito.js';
-import { generarContenedor } from '../controllers/principal.js';
+import { cargarObras } from '../views/contenidoDinamico.js';
 
 $(document).ready(async function () {
-    let arrayIds = [];
+    const modalElement = $('#contenedor-modal').data('size');
 
-    let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
-
-    objetosGuardados.forEach(objeto => {
-        arrayIds.push(objeto.id);
-    });
-    let ids = arrayIds.join('|');
-    await getListId(ids);
-    await generarContenedor('carrito-card-template', '#card-container', async function (mappedData) {
-        let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
-        let objetosMappeados = [];
-
-        objetosGuardados.forEach(objeto => {
-            let objetoOriginal = mappedData.find(obj => obj.id === objeto.id);
-
-            if (objetoOriginal) {
-                let copiaDelObjeto = JSON.parse(JSON.stringify(objetoOriginal));
-                copiaDelObjeto.tamaño = objeto.dimension;
-                copiaDelObjeto.cantidad = objeto.cantidad;
-                copiaDelObjeto.precio = objeto.precio;
-                copiaDelObjeto.precioXcantidad = (parseFloat(objeto.precio.replace('$', '')) * objeto.cantidad).toFixed(2)
-                objetosMappeados.push(copiaDelObjeto);
-            }
-        });
-        return objetosMappeados;
-    });
-    calculoPrecio(objetosGuardados);
-
+    if (modalElement === 'carrito-modal-card-template') {
+        await cargarObras('carrito-card-template', '#card-container', 'carrito');
+    }
 });
 
 export function notificacion(message) {
@@ -53,7 +28,7 @@ export function notificacion(message) {
     }, 6000);
 }
 
-function calculoPrecio(objetosGuardados) {
+export function calculoPrecio(objetosGuardados) {
     let precioTotal = 0;
 
     objetosGuardados.forEach(objeto => {
