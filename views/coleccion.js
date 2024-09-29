@@ -4,3 +4,4 @@ import {abrirModal} from '../views/modal.js'; //No sacar, se realiza la insersio
 $(document).ready(async function () {
     await cargarObras('card-template', '#card-container', 'coleccion');
 });
+

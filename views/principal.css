@@ -845,3 +845,8 @@ iframe {
     /* Four columns */
   }
 }
+
+.derecha.en-coleccion {
+  background-color: #ffcccc; /* Rojo tenue */
+  color: white;
+}
