@@ -7,7 +7,7 @@ export function updatePagination(paginasTotales) {
     const totalPages = paginasTotales;
 
     // Check if total pages is 1, if so, hide the pagination div
-    if (totalPages === 1) {
+    if (totalPages <2 ) {
         $('#pagination-container').html('<div class="pagination" style="display: none;"></div>');
         return; // No need to generate pagination for single page
     }
@@ -158,6 +158,11 @@ export async function cargarObras(templateId, contenedor, arrayLT) {
     objetosGuardados.forEach(objeto => {
         arrayIds.push(objeto.id);
     });
+
+    if (arrayIds.length === 0) {
+        arrayIds.push(-1); // Agregar -1 si el array está vacío
+    }
+    
     let ids = arrayIds.join('|');
     await getListId(ids);
     await generarContenedor(templateId, contenedor, async function (mappedData) {

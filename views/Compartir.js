@@ -1,5 +1,4 @@
 import {generarContenedor, updateApiUri} from '../controllers/principal.js';
-import { notificacion } from '../views/contenidoDinamico.js';
 
 // Función para obtener el parámetro de la URL
 function getParameterByName(name) {
@@ -144,7 +143,6 @@ function validarFormulario() {
     // Si hay un campo con error, centrar el foco y mostrar mensaje
     if (primerCampoConError) {
         primerCampoConError.focus();
-        notificacion("error formulario df dfd fdf df df dd dfd fdfd fdf efwe fe fefefe fefef efe fefefewe fef efef ");
         return false; // Evita el envío del mailto
     }
 

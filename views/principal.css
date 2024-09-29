@@ -74,7 +74,7 @@ body {
   padding: 0.5rem;
   width: 100%; /* Ensure items take full width of the column */
   box-sizing: border-box; /* Include padding in width calculation */
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   border-radius: 0.5em;
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -86,6 +86,8 @@ body {
 .row.make-columns > div:hover {
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.5); /* Sombra más grande y oscura al hacer hover */
 }
+
+
 
 /* Header */
 header {
@@ -123,9 +125,13 @@ header h1 {
   grid-column: span 2;
 }
 
-header img {
+#menu-toggle {
   max-width: 100%;
   height: auto;
+}
+
+#publicidad {
+  display: none;
 }
 
 /* Navigation */
@@ -143,7 +149,7 @@ nav ul {
 }
 
 nav ul li {
-  border: 1px solid #ddd;
+  border: 1px solid #bbb;
   background-color: #f9f9f9;
   font-size: 1.2em;
   padding: 0.5em;
@@ -160,6 +166,7 @@ nav ul a {
 
 main {
   padding: 0 1em;
+  min-height:80vh;
 }
 
 /* Search Container */
@@ -178,7 +185,7 @@ main {
 .contenedor-input-busqueda input {
   flex: 1;
   padding: 0.75em;
-  border: 1px solid #aaa;
+  border: 1px solid #bbb;
   border-radius: 0.5em 0 0 0.5em;
   height: 2.5em;
   min-width: 0; /* Ensures input shrinks with smaller screens */
@@ -212,9 +219,12 @@ select {
   height: 1.5em;
 }
 
+.filtro-categoria select {
+  border-radius: 0.5em;
+}
 /* Cards */
 .contenedor-tarjeta {
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   border-radius: 0.5em;
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
   text-align: center;
@@ -298,8 +308,12 @@ select {
 .compartir-coleccionar {
   display: flex;
   justify-content: space-between;
-  border: 1px solid #ddd;
+  border: 1px solid #bbb;
   background-color: #f9f9f9;
+}
+
+#resultado-compartido {
+  margin: 0 auto;
 }
 
 .contenedor-imagen-modal {
@@ -310,7 +324,7 @@ select {
 .compartir-coleccionar .izquierda,
 .compartir-coleccionar .derecha {
   flex: 1;
-  padding: 0.5em;
+  padding: 0.4em;
   text-align: center;
   font-weight: bold;
   cursor: pointer;
@@ -339,7 +353,7 @@ body.modal-abierto {
 
 /* Card Box */
 .card-box {
-  border: 1px solid #ddd;
+  border: 1px solid #bbb;
   border-radius: 1em;
   overflow: hidden;
   background-color: #fff;
@@ -375,7 +389,6 @@ body.modal-abierto {
 .buy-section {
   text-align: center;
   font-size: 1.2em;
-  border-top: 1px solid #ddd;
 }
 
 .buy-section button {
@@ -420,6 +433,14 @@ body.modal-abierto {
   color: #fff;
 }
 
+#sin-contenido {
+  font-size: 2em;
+  color: #333;
+  width: 100%;
+  display: block;
+  text-align:center;
+  padding-top: 1em;
+}
 /* Pagination */
 .pagination {
   display: flex;
@@ -433,7 +454,7 @@ body.modal-abierto {
   color: #333;
   text-decoration: none;
   padding: 0.5em 1em;
-  border: 1px solid #ddd;
+  border: 1px solid #bbb;
   border-radius: 0.5em;
   transition: background-color 0.3s, color 0.3s;
 }
@@ -483,7 +504,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   border-radius: 0.5em;
   margin-bottom: 1em;
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
@@ -546,7 +567,7 @@ iframe {
 .contenedor-finalizar-compra {
   margin: 1em 0;
   padding: 0.5em;
-  border: 1px solid #ccc;
+  border: 1px solid #bbb;
   border-radius: 0.5em;
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
   background-color: white;
@@ -688,7 +709,7 @@ iframe {
     font-size: 1.8em;
   }
 
-  header img {
+  #menu-toggle {
     max-width: 70%;
   }
 
@@ -764,6 +785,26 @@ iframe {
 }
 @media (min-width: 1024px)
 {
+  #publicidad {
+    display: block;
+    width: auto; /* Mantiene la relación de aspecto */
+    float: right;
+  }
+  .contenedor-barras{
+    display: block;
+    overflow: hidden; /* Opcional: evita el desbordamiento */
+
+  }
+  #menu-toggle {
+    display:none;
+  }
+  .contenedor-barras
+  {
+    grid-column: span 3;
+  }
+  .contenedor-titulo{
+    grid-column: span 7;
+  }
   .contenedor-imagen-modal img {
     max-height: 80vh;
   }

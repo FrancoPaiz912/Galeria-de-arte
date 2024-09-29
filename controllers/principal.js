@@ -86,15 +86,31 @@ export async function generarContenedor(templateId, containerId, funcion = (mapp
     let mappedData = mapApiData(data);
 
     if (funcion && typeof funcion === 'function') {
-        const resultado = await funcion(mappedData); //No quitar este await, por mas que VSCODE diga lo contrario.
+        const resultado = await funcion(mappedData); // No quitar este await, por más que VSCODE diga lo contrario.
         if (resultado !== undefined) {
             mappedData = resultado;
         }
-    }
+    } 
+    $('#sin-contenido').remove();
 
-    fetchAndPopulateTemplate(templateId, containerId, mappedData);
+    // Comprobar si mappedData tiene contenido
+    if (mappedData.length === 0) {
+        // Insertar código HTML si no hay resultados
+        const $container = $(containerId);
+        $container.empty();
+        $container.after('<div id="sin-contenido"> No hay resultados para mostrar</div>');
+    }
+    else {
+        fetchAndPopulateTemplate(templateId, containerId, mappedData);
+        console.log(mappedData.length);
+    }
     updatePagination(data.info.pages);
+
+
+        // Si hay contenido, proceder a generar la plantilla
+
 }
+
 
 const params = {
     q: '',

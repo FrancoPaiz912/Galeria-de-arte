@@ -71,8 +71,10 @@ export async function abrirModal(id, templateId) { //Hacer lo mas general posibl
         
         if (elementHTML.classList.contains('buy-section')) {
             arrayLS = 'carrito';
+            notificacion("Agregado a carrito");
         } else if (elementHTML.classList.contains('derecha')) {
             arrayLS = 'coleccion';
+
         }
         
         let objetosGuardados = JSON.parse(localStorage.getItem(arrayLS)) || [];
@@ -99,6 +101,7 @@ export async function abrirModal(id, templateId) { //Hacer lo mas general posibl
         if(arrayLS === 'coleccion' && ifExist) {
             return;
         }
+        notificacion("Agregado a Colección");
 
         if (objeto) {
             objeto.cantidad += 1;
