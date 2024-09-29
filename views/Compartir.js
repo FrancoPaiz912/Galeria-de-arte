@@ -1,4 +1,6 @@
 import {generarContenedor, updateApiUri} from '../controllers/principal.js';
+import {notificacion } from '../views/contenidoDinamico.js';
+
 
 // Función para obtener el parámetro de la URL
 function getParameterByName(name) {
@@ -42,6 +44,7 @@ document.getElementById('encuesta').addEventListener('submit', function(event) {
     // Crear el cuerpo y el enlace mailto
     var body = createBody(sender, commentary, artist, title, link);
     var mailtoLink = createMailtoLink(recipient, "Mira lo que esa obra papa", body);
+    notificacion ("Abriendo gestor de correo");
     console.log(mailtoLink);
 
     // Abrir el enlace mailto

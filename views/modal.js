@@ -107,14 +107,15 @@ export async function abrirModal(id, templateId) { //Hacer lo mas general posibl
             objetosGuardados = objetosGuardados.filter(obra => obra.id !== id);
             localStorage.setItem(arrayLS, JSON.stringify(objetosGuardados));
             $(elementHTML).toggleClass('en-coleccion');
-            $(elementHTML).html('<img src="/img/basicas/plus-regular-24 (1).png" />Coleccionar ');
+            $(elementHTML).html('<img src="/img/basicas/coleccion.png"> Coleccionar');
+            notificacion("Eliminado de Colección");
             return;
         }
         else if(arrayLS === 'coleccion' && !ifExist){
             $(elementHTML).toggleClass('en-coleccion');
             $(elementHTML).html('<img src="/img/basicas/minus-regular-24.png" /> En coleccion ');
+            notificacion("Agregado a Colección");
         }
-        notificacion("Agregado a Colección");
 
 
         if (objeto) {
