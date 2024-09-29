@@ -40,7 +40,7 @@ export function calculoPrecio(objetosGuardados) {
 }
 
 $(document).on('click', '.botonMas', function (e) {
-    e.stopPropagation(); // Evita que el clic se propague al contenedor-tarjeta
+    e.stopPropagation(); //Evita que el evento se propague por todos los padres que tiene(tiene como 5 weh)
     const boton = $(this);
     const tarjeta = boton.closest('.contenedor-tarjeta'); 
     const id = tarjeta.data('id');
@@ -60,7 +60,7 @@ $(document).on('click', '.botonMas', function (e) {
 });
 
 $(document).on('click', '.botonMenos', function (e) {
-    e.stopPropagation(); // Evita que el clic se propague al contenedor-tarjeta
+    e.stopPropagation(); 
     const boton = $(this);
     const tarjeta = boton.closest('.contenedor-tarjeta'); 
     const id = tarjeta.data('id');

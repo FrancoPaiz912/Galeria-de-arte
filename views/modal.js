@@ -40,6 +40,16 @@ export async function abrirModal(id, templateId) { //Hacer lo mas general posibl
     // Cerrar el modal al hacer clic en el botón de cerrar
     $modal.find('.cerrar-modal').on('click', function () {
         // Habilitar de nuevo el scroll en el body
+        
+        let objetosGuardados = JSON.parse(localStorage.getItem('coleccion')) || [];
+        const ifExist = objetosGuardados.find(obra => obra.id === Number(id) );
+        if (window.location.pathname.endsWith('Coleccion.html') && !ifExist) {
+                
+            const elemento = $('.contenedor-tarjeta[data-id="' + id + '"]');
+            
+            $(elemento).remove();
+        }
+
         $('body').removeClass('modal-abierto');
         $modal.css('display', 'none');
     });
@@ -62,9 +72,16 @@ export async function abrirModal(id, templateId) { //Hacer lo mas general posibl
         $modal.find('#detalles-' + size).show();
     });
 
+    let objetosGuardados = JSON.parse(localStorage.getItem('coleccion')) || [];
+    const ifExist = objetosGuardados.find(obra => obra.id === Number(id) );
+    if(objetosGuardados.length > 0 && ifExist){
+        const element = $('.derecha');
+        $(element).toggleClass('en-coleccion');
+        $(element).html('<img src="/img/basicas/minus-regular-24.png" /> En coleccion ');
+    }
 
     $('.buy-section, .derecha').on("click", function () {
-        // Recupera los objetos guardados del localStorage o inicializa un array vacío
+
         let arrayLS;
         
         const elementHTML = this;
@@ -77,27 +94,23 @@ export async function abrirModal(id, templateId) { //Hacer lo mas general posibl
         
         let objetosGuardados = JSON.parse(localStorage.getItem(arrayLS)) || [];
 
-        console.log("Objetos guardados:", objetosGuardados);
-
-        // Obtiene la dimensión seleccionada
-        const dimensionSeleccionada = $('.top-section .seleccionado').data('size');
-        console.log("Tamaño seleccionado:", dimensionSeleccionada);
-
-        // Selecciona el botón de compra y el ID del objeto
         const id = $('.buy-section').data('id');
         
-        // Obtiene los detalles visibles de dimensión y precio
         const detalleVisible = $('.detalles-tamano:visible');
-        const dimension = detalleVisible.find('.dimenciones-modal').text().trim(); // Asegúrate de eliminar espacios
-        const precio = detalleVisible.find('.precio-modal').text().trim(); // Asegúrate de eliminar espacios
-        console.log("ID desde el botón:", id); // Para debug
-        console.log("Dimensión obtenida:", dimension); // Para debug
-        console.log("Precio obtenido:", precio); // Para debug
-        console.log(objetosGuardados);
+        const dimension = detalleVisible.find('.dimenciones-modal').text().trim(); 
+        const precio = detalleVisible.find('.precio-modal').text().trim(); 
         const objeto = objetosGuardados.find(obra => obra.id === id & obra.dimension === dimension);
         const ifExist = objetosGuardados.find(obra => obra.id === id );
         if(arrayLS === 'coleccion' && ifExist) {
+            objetosGuardados = objetosGuardados.filter(obra => obra.id !== id);
+            localStorage.setItem(arrayLS, JSON.stringify(objetosGuardados));
+            $(elementHTML).toggleClass('en-coleccion');
+            $(elementHTML).html('<img src="/img/basicas/plus-regular-24 (1).png" />Coleccionar ');
             return;
+        }
+        else if(arrayLS === 'coleccion' && !ifExist){
+            $(elementHTML).toggleClass('en-coleccion');
+            $(elementHTML).html('<img src="/img/basicas/minus-regular-24.png" /> En coleccion ');
         }
 
         if (objeto) {
