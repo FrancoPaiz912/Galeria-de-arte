@@ -59,7 +59,6 @@ export function mapApiData(apiData) {
                 aspectRatio: width/height
             };
             mappedObjects.push(mappedObject);
-            console.log(mappedObject);
             return mappedObject;
         });
 }
