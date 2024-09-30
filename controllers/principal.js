@@ -157,7 +157,7 @@ function calculateCost(dimensionsInput, PrecioPorCm, size) {
         } else if (size === 'grande') {
             return "$24000";
         }
-        return "$132000"; // Manejar cualquier error si el tamaño no es reconocido
+        return "$12000"; // Manejar cualquier error si el tamaño no es reconocido
     }
 }
 
