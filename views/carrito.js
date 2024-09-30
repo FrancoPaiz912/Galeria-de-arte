@@ -1,6 +1,5 @@
 import { cargarObras, notificacion } from '../views/contenidoDinamico.js';
 
-
 $(document).ready(async function () {
     const modalElement = $('#contenedor-modal').data('size');
 
@@ -9,8 +8,8 @@ $(document).ready(async function () {
     }
 });
 
-
 export function calculoPrecio(objetosGuardados) {
+
     let precioTotal = 0;
 
     objetosGuardados.forEach(objeto => {
@@ -20,59 +19,49 @@ export function calculoPrecio(objetosGuardados) {
     });
     $('#precio-final').text('$' + precioTotal);
 }
-$("#finalizar-compra").click(function() {
+
+$("#finalizar-compra").click(function () {
     notificacion("¡Compra Finalizada!");
     localStorage.removeItem("carrito");
-    setTimeout(function() {
+    setTimeout(function () {
         location.reload();
     }, 1000);
-  });
-
-$(document).on('click', '.botonMas', function (e) {
-    e.stopPropagation(); //Evita que el evento se propague por todos los padres que tiene(tiene como 5 weh)
-    const boton = $(this);
-    const tarjeta = boton.closest('.contenedor-tarjeta'); 
-    const id = tarjeta.data('id');
-    const dimension = tarjeta.find('.tamano').text();
-    let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
-    
-    const objeto = objetosGuardados.find(obra => obra.id === id && obra.dimension === dimension);
-    if (objeto) {
-        objeto.cantidad += 1;
-        localStorage.setItem('carrito', JSON.stringify(objetosGuardados));
-        tarjeta.find('.cantidad').text(`Cantidad: ${objeto.cantidad}`);
-        let precio = parseFloat(objeto.precio.replace('$', ''));
-        let subtotal = precio * objeto.cantidad;
-        tarjeta.find('.precio').text(subtotal.toFixed(2));
-    }
-    calculoPrecio(objetosGuardados);
 });
 
-$(document).on('click', '.botonMenos', function (e) {
-    e.stopPropagation(); 
-    const boton = $(this);
-    const tarjeta = boton.closest('.contenedor-tarjeta'); 
+function actualizarCantidad(boton, operacion) {
+    const tarjeta = boton.closest('.contenedor-tarjeta');
     const id = tarjeta.data('id');
     const dimension = tarjeta.find('.tamano').text();
     let objetosGuardados = JSON.parse(localStorage.getItem('carrito')) || [];
 
     const objeto = objetosGuardados.find(obra => obra.id === id && obra.dimension === dimension);
+    
     if (objeto) {
-        objeto.cantidad -= 1;
+        objeto.cantidad += operacion; // operación puede ser 1 o -1
         if (objeto.cantidad === 0) {
             objetosGuardados = objetosGuardados.filter(obra => !(obra.id === id && obra.dimension === dimension));
             tarjeta.remove();
+        } else {
+            tarjeta.find('.cantidad').text(`Cantidad: ${objeto.cantidad}`);
         }
-        tarjeta.find('.cantidad').text(`Cantidad: ${objeto.cantidad}`);
-        let precio = parseFloat(objeto.precio.replace('$', ''));
-        let subtotal = precio * objeto.cantidad;
-        tarjeta.find('.precio').text(subtotal.toFixed(2));
         localStorage.setItem('carrito', JSON.stringify(objetosGuardados));
     }
-    if (objetosGuardados.length == 0) {
+    if (objetosGuardados.length === 0) {
         location.reload();
     }
-    calculoPrecio(objetosGuardados);
+    let precio = parseFloat(objeto.precio.replace('$', ''));
+    let subtotal = precio * objeto.cantidad;
+    tarjeta.find('.precio').text(subtotal.toFixed(2));
+    calculoPrecio(objetosGuardados, tarjeta);
+}
+
+$(document).on('click', '.botonMenos', function (e) {
+    e.stopPropagation();
+    actualizarCantidad($(this), -1);
 });
 
+$(document).on('click', '.botonMas', function (e) {
+    e.stopPropagation();
+    actualizarCantidad($(this), 1);
+});
 

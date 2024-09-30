@@ -6,44 +6,35 @@ export function updatePagination(paginasTotales) {
     const currentPage = getCurrentPage();
     const totalPages = paginasTotales;
 
-    // Check if total pages is 1, if so, hide the pagination div
+    // Comprobamos la cantidad de pàginas para tener o no paginacion
     if (totalPages <2 ) {
         $('#pagination-container').html('<div class="pagination" style="display: none;"></div>');
-        return; // No need to generate pagination for single page
+        return; 
     }
 
-    // Create pagination HTML
-    let paginationHtml = '<div class="pagination">'; // Wrap everything in a pagination container
+    let paginationHtml = '<div class="pagination">';
 
-    // Add First and Previous buttons
-    // Use 'visibility: hidden' instead of 'display: none' to preserve space
     paginationHtml += `<a href="#" class="prev" data-page="1" style="visibility: ${currentPage <= 1 ? 'hidden' : 'visible'};">&lt;&lt;</a>`;
     paginationHtml += `<a href="#" class="prev" data-page="${currentPage - 1}" style="visibility: ${currentPage <= 1 ? 'hidden' : 'visible'};">&lt;</a>`;
 
-    // Add Current Page
     paginationHtml += `<div class="page-numbers"><a href="#" class="active" data-page="${currentPage}">${currentPage}</a></div>`;
 
-    // Add Next and Last buttons
-    // Use 'visibility: hidden' instead of 'display: none' to preserve space
     paginationHtml += `<a href="#" class="next" data-page="${currentPage + 1}" style="visibility: ${currentPage >= totalPages ? 'hidden' : 'visible'};">&gt;</a>`;
     paginationHtml += `<a href="#" class="next" data-page="${totalPages}" style="visibility: ${currentPage >= totalPages ? 'hidden' : 'visible'};">&gt;&gt;</a>`;
 
-    paginationHtml += '</div>'; // Close the pagination container
+    paginationHtml += '</div>';
 
-    // Insert pagination HTML into the container
     $('#pagination-container').html(paginationHtml);
 
-    // Configure the page number links
     $('#pagination-container a').on('click', function (e) {
-        e.preventDefault(); // Prevent default link behavior
+        e.preventDefault(); 
         const page = $(this).data('page');
         if (page) {
             updateApiUri({ page: page });
-            generarContenedor('card-template', '#card-container'); // Adjust templateId and containerId as needed
+            generarContenedor('card-template', '#card-container');
         }
     });
 }
-
 
 function fetchTemplate(templateId, callback) {
     $.get('template.html')
@@ -128,26 +119,19 @@ export function insertHeaderNavFooter(headerNavId, footerId, callback) {
 }
 
 export function notificacion(message) {
-    console.log("notificacion: " + message)
-    // Verificar si el contenedor de notificación ya existe
+
     if ($('#notification').length === 0) {
-        // Crear el div de notificación y agregarlo al body
         $('body').append('<div class="notification" id="notification"></div>');
     }
-    console.log(message);
 
-    // Colocar el mensaje dentro del contenedor de notificación
     $('#notification').text(message);
 
-    // Mostrar la caja de notificación
     $('#notification').fadeIn();
 
-    // Hacer que desaparezca después de 6 segundos
     setTimeout(function () {
         $('#notification').fadeOut();
     }, 3000);
 }
-
 
 export async function cargarObras(templateId, contenedor, arrayLT) {
 
@@ -187,7 +171,6 @@ export async function cargarObras(templateId, contenedor, arrayLT) {
         calculoPrecio(objetosGuardados);
     }
 };
-
 
 export default {
     updatePagination,

@@ -1,18 +1,15 @@
 import {abrirModal} from '../views/modal.js';
 import {updateApiUri, mappedObjects, generarContenedor} from '../controllers/principal.js';
-// import {insertHeaderNavFooter} from '../views/contenidoDinamico.js'
 
 $(document).on('click', '.contenedor-tarjeta', function() {
-    // Obtener los datos del elemento clickeado
     const id = $(this).attr('data-id'); 
     let templateId = $('#contenedor-modal').data('size');
     abrirModal(id, templateId);
 });
 
-// Manejar el evento de click en los números de página
 $(document).on('click', '.page-numbers a', function(e) {
-    e.preventDefault(); // Evitar comportamiento por defecto del enlace
-    const pageNumber = $(this).data('page'); // Obtener el número de página del enlace
+    e.preventDefault(); 
+    const pageNumber = $(this).data('page');
 
     updateApiUri({ page: pageNumber });
     generarContenedor(templateId, containerId);

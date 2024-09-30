@@ -7,7 +7,7 @@ const containerId = '#card-container';
 document.addEventListener('DOMContentLoaded', async function() {
 
     const id = getParameterByName('id');
-    console.log("este es el id pasado " + id);
+
     if (id != null)
     {
         updateApiUri({id:id});
@@ -47,7 +47,7 @@ export function opcionesFiltros(opciones, select) {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Obtener la imagen de reset y añadir el event listener
+    
     const resetButton = document.getElementById('reset-busqueda');
 
     resetButton.addEventListener('click', botonResetSearch);

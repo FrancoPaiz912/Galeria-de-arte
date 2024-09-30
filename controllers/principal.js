@@ -25,19 +25,19 @@ export function mapApiData(apiData) {
             const mappedObject = {
                 imageUrl,
                 title: record.title || 'No title',
-                price: '$9000', // Placeholder, modificar si es necesario
+                price: '$9000', 
                 classificationId: record.classificationid || 'No classification ID',
                 division: record.division || 'No division',
                 colorCount: record.colorcount || 0,
                 id: record.id || 'No ID',
                 workTypes: record.worktypes ? record.worktypes.map(type => type.worktype).join(', ') : 'No work types',
                 imageCount: record.imagecount || 0,
-                classification: record.classification || 'No classification', // Already present, no duplication
-                medium: record.medium || 'No medium', // Already present, no duplication
-                dated: record.dated || 'No date', // Already present, no duplication
-                century: record.century || 'No century', // Already present, no duplication
-                culture: record.culture || 'No culture', // New addition
-                dimensions: record.dimensions || 'No dimensions', // New addition
+                classification: record.classification || 'No classification', 
+                medium: record.medium || 'No medium', 
+                dated: record.dated || 'No date', 
+                century: record.century || 'No century', 
+                culture: record.culture || 'No culture', 
+                dimensions: record.dimensions || 'No dimensions', 
                 titlesCount: record.titlescount || 0,
                 peopleCount: record.peoplecount || 0,
                 people: record.people ? record.people.filter(person => person.role === 'Artist').map(person => person.displayname).join(', ') : 'No artist',
@@ -48,8 +48,8 @@ export function mapApiData(apiData) {
                 tamaño: null,
                 cantidad: null,
                 precioXcantidad: null,
-                height: height,  // Asignar la altura
-                width: width,     // Asignar el ancho
+                height: height,  
+                width: width,    
                 aspectRatio: width/height
             };
             mappedObjects.push(mappedObject);
@@ -75,14 +75,12 @@ export function updateApiUri(params) {
         }
     }
     setURL(url.toString());
-    console.log(currentUri);
 
     return currentUri;
 }
 
 export async function generarContenedor(templateId, containerId, funcion = (mappedData) => { }) {
     const data = await updateContent();
-    console.log("updateContent");
     let mappedData = mapApiData(data);
 
     if (funcion && typeof funcion === 'function') {
@@ -93,21 +91,15 @@ export async function generarContenedor(templateId, containerId, funcion = (mapp
     } 
     $('#sin-contenido').remove();
 
-    // Comprobar si mappedData tiene contenido
     if (mappedData.length === 0) {
-        // Insertar código HTML si no hay resultados
         const $container = $(containerId);
         $container.empty();
         $container.after('<div id="sin-contenido"> No hay resultados para mostrar</div>');
     }
     else {
         fetchAndPopulateTemplate(templateId, containerId, mappedData);
-        console.log(mappedData.length);
     }
     updatePagination(data.info.pages);
-
-
-        // Si hay contenido, proceder a generar la plantilla
 
 }
 
@@ -128,9 +120,7 @@ const params = {
 };
 
 $(document).ready(function () {
-    // Carga header, nav y footer
     insertHeaderNavFooter('header-nav-template', 'footer-template', function () {
-        // Este código se ejecuta después de que ambos templates han sido insertados
 
         // Alterna la visibilidad del menú al hacer clic en el botón
         $('#menu-toggle').click(function () {
