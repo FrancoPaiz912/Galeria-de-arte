@@ -23,10 +23,9 @@ export function calculoPrecio(objetosGuardados) {
 $("#finalizar-compra").click(function() {
     notificacion("¡Compra Finalizada!");
     localStorage.removeItem("carrito");
-    setTimeout(() => {
-        if(objetosGuardados.length==0){
-            location.reload();
-        }
+
+    setTimeout(function() {
+        location.reload();
     }, 1000);
   });
 
@@ -71,7 +70,8 @@ $(document).on('click', '.botonMenos', function (e) {
         tarjeta.find('.precio').text(subtotal.toFixed(2));
         localStorage.setItem('carrito', JSON.stringify(objetosGuardados));
     }
-    if(objetosGuardados.length==0){
+    
+    if (objetosGuardados.length == 0) {
         location.reload();
     }
     calculoPrecio(objetosGuardados);
