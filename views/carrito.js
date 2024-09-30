@@ -1,4 +1,5 @@
-import { cargarObras } from '../views/contenidoDinamico.js';
+import { cargarObras, notificacion } from '../views/contenidoDinamico.js';
+
 
 $(document).ready(async function () {
     const modalElement = $('#contenedor-modal').data('size');
@@ -8,25 +9,6 @@ $(document).ready(async function () {
     }
 });
 
-export function notificacion(message) {
-    // Verificar si el contenedor de notificación ya existe
-    if ($('#notification').length === 0) {
-        // Crear el div de notificación y agregarlo al body
-        $('body').append('<div class="notification" id="notification"></div>');
-    }
-    console.log(message);
-
-    // Colocar el mensaje dentro del contenedor de notificación
-    $('#notification').text(message);
-
-    // Mostrar la caja de notificación
-    $('#notification').fadeIn();
-
-    // Hacer que desaparezca después de 6 segundos
-    setTimeout(function () {
-        $('#notification').fadeOut();
-    }, 6000);
-}
 
 export function calculoPrecio(objetosGuardados) {
     let precioTotal = 0;
@@ -38,6 +20,11 @@ export function calculoPrecio(objetosGuardados) {
     });
     $('#precio-final').text('$' + precioTotal);
 }
+$("#finalizar-compra").click(function() {
+    notificacion("¡Compra Finalizada!");
+    localStorage.removeItem("carrito");
+
+  });
 
 $(document).on('click', '.botonMas', function (e) {
     e.stopPropagation(); //Evita que el evento se propague por todos los padres que tiene(tiene como 5 weh)

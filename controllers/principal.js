@@ -135,6 +135,7 @@ $(document).ready(function () {
         // Alterna la visibilidad del menú al hacer clic en el botón
         $('#menu-toggle').click(function () {
             $('#nav-menu').slideToggle();
+            
         });
     });
 });

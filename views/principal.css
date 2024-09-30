@@ -313,8 +313,21 @@ select {
 }
 
 #resultado-compartido {
-  margin: 0 auto;
+  background-color: white;
+  width: 100%;
+  margin: 1em 1em 0 0;
+  padding-left: 1em;
+  border: 1px solid #bbb;
+  border-radius: 0.5em;
+  padding-bottom: 1em;
+
 }
+
+#resultado-compartido img {
+  max-height: 90vh;
+  margin: auto;
+}
+
 
 .contenedor-imagen-modal {
   border-radius: 0.5em;
@@ -513,6 +526,7 @@ footer {
 
 .contenedor-contacto {
   margin: 1em 0;
+  width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
 }
 
 .datos-persona {
@@ -521,23 +535,22 @@ footer {
   padding-bottom: 1em;
 }
 
-.imagen-persona img {
+
+
+.imagen-persona img, .datos-persona img {
   width: 100%;
   height: auto;
   border-radius: 0.5em;
-  padding-bottom: 1em;
+  padding: 1em;
 }
 
 /* Iframe */
 iframe {
   width: 90vw;
-  height: 90vw;
+  aspect-ratio: 1;
   background: black;
 }
 
-#contenedor-mapa {
-  padding-top: 1em;
-}
 
 /* notififaciones*/
 .notification {
@@ -546,8 +559,9 @@ iframe {
   left: 50%;
   transform: translateX(-50%);
   background-color: #fff;
-  color: black;
+  color: white;
   padding: 1em;
+  background-color: #28a745;
   border-radius: 0.5em;
   box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.4);
   display: none;
@@ -555,7 +569,7 @@ iframe {
   font-weight: bold;
   width: 80%;
   /* Adjust this to make it wider or narrower */
-  max-width: 800px;
+  max-width: 885px;
   /* Optional: Limit the maximum width */
 }
 
@@ -741,11 +755,14 @@ iframe {
   }
 
   #nav-menu {
-    display: block;
+    display: block !important;
   }
 }
 
 @media (min-width: 768px) {
+  .notification {
+    width: 50%;
+  }
 
   .row.make-columns {
     column-count: 3;
@@ -785,6 +802,22 @@ iframe {
 }
 @media (min-width: 1024px)
 {
+  .notification {
+    width: 35%;
+  }
+  .contenedor-flex {
+    display: flex;
+
+  }
+
+  #resultado-compartido {
+    width: 100%;
+    margin: 1em 1em 0 0;
+    padding-left: 1em;
+    border: 1px solid #bbb;
+    
+  }
+
   #publicidad {
     display: block;
     width: auto; /* Mantiene la relación de aspecto */
@@ -830,6 +863,23 @@ iframe {
 .modal-titulo
 {
   font-size: 1.5em;
+}
+
+.contenedor-contacto
+{
+display: flex;
+}
+.contacto-izquierd {
+  width: 25%; /* 1/3 del ancho */
+}
+
+.contacto-derecho {
+  width: 75%; /* 2/3 del ancho */
+  padding-left: 1em;
+}
+iframe {
+  width: 67vw;
+  max-width: 888px;
 }
 }
 @media (min-width: 1280px)

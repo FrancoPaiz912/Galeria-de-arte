@@ -1,6 +1,7 @@
 import {generarContenedor, updateApiUri} from '../controllers/principal.js';
 import {notificacion } from '../views/contenidoDinamico.js';
 
+window.resetForm = resetForm;
 
 // Función para obtener el parámetro de la URL
 function getParameterByName(name) {
@@ -43,7 +44,7 @@ document.getElementById('encuesta').addEventListener('submit', function(event) {
 
     // Crear el cuerpo y el enlace mailto
     var body = createBody(sender, commentary, artist, title, link);
-    var mailtoLink = createMailtoLink(recipient, "Mira lo que esa obra papa", body);
+    var mailtoLink = createMailtoLink(recipient, "Mira como esta esa obra papá: " + title, body);
     notificacion ("Abriendo gestor de correo");
     console.log(mailtoLink);
 
@@ -75,7 +76,7 @@ function createMailtoLink(to, subject, body) {
 function createBody(sender, commentary, artist, title, link) {
     // Set default commentary if it's empty
     if (!commentary || commentary.trim() === "") {
-        commentary = "Hola, mira esta obra, se puede comprar una impresión de alta calidad en varios tamaños.";
+        commentary = "Hola, mira esta obra. En este sitio se puede comprar una impresión de alta calidad en varios tamaños.";
     }
 
     // Create the body text

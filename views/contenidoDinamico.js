@@ -145,7 +145,7 @@ export function notificacion(message) {
     // Hacer que desaparezca después de 6 segundos
     setTimeout(function () {
         $('#notification').fadeOut();
-    }, 4000);
+    }, 3000);
 }
 
 
