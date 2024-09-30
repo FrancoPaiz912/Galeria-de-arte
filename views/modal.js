@@ -81,7 +81,7 @@ export async function abrirModal(id, templateId) { //Hacer lo mas general posibl
     if(objetosGuardados.length > 0 && ifExist){
         const element = $('.derecha');
         $(element).toggleClass('en-coleccion');
-        $(element).html('<img src="/img/basicas/minus-regular-24.png" /> En coleccion ');
+        $(element).html('<img src="/img/basicas/minus-regular-24.png" /> En Colección ');
     }
 
     $('.buy-section, .derecha').on("click", function () {
@@ -116,7 +116,7 @@ export async function abrirModal(id, templateId) { //Hacer lo mas general posibl
         }
         else if(arrayLS === 'coleccion' && !ifExist){
             $(elementHTML).toggleClass('en-coleccion');
-            $(elementHTML).html('<img src="/img/basicas/minus-regular-24.png" /> En coleccion ');
+            $(elementHTML).html('<img src="/img/basicas/minus-regular-24.png" /> En Colección ');
             notificacion("Agregado a Colección");
         }
 
