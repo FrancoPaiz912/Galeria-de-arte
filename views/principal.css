@@ -739,6 +739,13 @@ iframe {
   .artista {
     font-size: 1.1em;
   }
+  header {
+    height: 115px;
+  }
+
+  .contenedor-logo img {
+    height: 75px;
+  }
 
 
 
@@ -770,14 +777,6 @@ iframe {
   }
   .modal-contenido {
     padding-bottom: 1em;
-  }
-
-  header {
-    height: 115px;
-  }
-
-  .contenedor-logo img {
-    height: 75px;
   }
 
   .contenedor-grid-imagen-datos {
