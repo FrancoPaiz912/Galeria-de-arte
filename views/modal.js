@@ -48,6 +48,10 @@ export async function abrirModal(id, templateId) { //Hacer lo mas general posibl
             const elemento = $('.contenedor-tarjeta[data-id="' + id + '"]');
             
             $(elemento).remove();
+
+            if(objetosGuardados.length==0){
+                location.reload();
+            }
         }
 
         $('body').removeClass('modal-abierto');

@@ -1,7 +1,6 @@
 import {updateApiUri, generarContenedor} from '../controllers/principal.js';
 import {abrirModal} from '../views/modal.js';
 
-
 const templateId = 'card-template';
 const containerId = '#card-container';
 
