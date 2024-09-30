@@ -22,6 +22,9 @@ export function mapApiData(apiData) {
                 width = record.images[0].width || null;
                 height = record.images[0].height || null;
             }
+            let dimensions = parseDimensions(record.dimensions) || 'Mediano';
+            let dimensionsChico= reSize(record.dimensions, 0.75);
+            let dimensionsGrande=  reSize(record.dimensions, 1.5);
             
             const mappedObject = {
                 imageUrl,
@@ -38,16 +41,16 @@ export function mapApiData(apiData) {
                 dated: record.dated || 'No date', // Already present, no duplication
                 century: record.century || 'No century', // Already present, no duplication
                 culture: record.culture || 'No culture', // New addition
-                dimensions: parseDimensions(record.dimensions) || 'Mediano', // New addition
-                dimensionsChico: reSize(record.dimensions, 0.75) ,
-                dimensionsGrande: reSize(record.dimensions, 1.5) ,
+                dimensions, // New addition
+                dimensionsChico,
+                dimensionsGrande,
                 titlesCount: record.titlescount || 0,
                 peopleCount: record.peoplecount || 0,
                 people: record.people ? record.people.filter(person => person.role === 'Artist').map(person => person.displayname).join(', ') : 'No artist',
                 url: record.url || 'No URL',
-                priceSmall: 'No price',
-                priceMedium: 'No price',
-                priceLarge: 'No price',
+                priceSmall: calculateCost(dimensionsChico, 10),
+                priceMedium: calculateCost(dimensions, 10),
+                priceLarge: calculateCost(dimensionsGrande, 10),
                 tamaño: null,
                 cantidad: null,
                 precioXcantidad: null,
@@ -108,27 +111,42 @@ function reSize(dimensions, multiplier) {
     }
 }
 
-function calculateCost(dimensionsInput, PrecioPorCm) {
+function calculateCost(dimensionsInput, PrecioPorCm, size) {
     try {
-        // Parse the dimensions using the existing function
-        const dimensions = parseDimensions(dimensionsInput);
-        if (dimensions === null) {
-            return "Error en las dimensiones";
+        // Extract the width and height from the dimensions input
+        const [widthStr, heightStr] = dimensionsInput.split('x').map(dim => dim.trim());
+
+        // Parse the numerical values from the strings
+        const width = parseFloat(widthStr.replace('cm', ''));
+        const height = parseFloat(heightStr.replace('cm', ''));
+
+        // Check if parsing was successful
+        if (isNaN(width) || isNaN(height)) {
+            throw new Error("Invalid dimensions");
         }
 
-        // Resize the dimensions using a default multiplier (for example, 1)
-        const resizedDimensions = reSize(dimensions, 1);
-        
-        // Extract the width and height from the resized dimensions
-        const [widthStr, heightStr] = resizedDimensions.split('x').map(dim => parseFloat(dim.trim().replace('cm', '')));
-        
+        // Adjust PrecioPorCm based on size
+        if (size === 'chico') {
+            PrecioPorCm *= 1.5;
+        } else if (size === 'grande') {
+            PrecioPorCm *= 0.75;
+        }
+
         // Calculate area and then cost
-        const area = widthStr * heightStr; // Area in cm²
+        const area = width * height; // Area in cm²
         const cost = area * PrecioPorCm; // Total cost based on area and price per cm
 
-        return cost.toFixed(2); // Return the cost formatted to 2 decimal places
+        return `$${cost.toFixed(2)}`; // Return the cost formatted to 2 decimal places
     } catch (error) {
-        return "Error en el cálculo"; // Handle any errors
+        // Return specific costs based on the size
+        if (size === 'chico' || dimensionsInput=== 'Chico') {
+            return "$ 6000";
+        } else if (size === 'mediano' || dimensionsInput=== 'Mediano') {
+            return "$ 12000";
+        } else if (size === 'grande' || dimensionsInput=== 'Grande') {
+            return "$ 24000";
+        }
+        return "$ 12000"; // Handle any errors if size is not recognized
     }
 }
 
