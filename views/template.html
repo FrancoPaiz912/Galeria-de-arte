@@ -3,7 +3,7 @@
         <img src="{{imageUrl}}?width=450" alt="{{title}}" class="imagen-tarjeta imagenApi">
         <div class="contenido-tarjeta">
             <h3 class="titulo-tarjeta">{{title}}</h3>
-            <p class="precio">{{price}}</p>
+            <p class="precio">{{priceMedium}}</p>
         </div>
     </div>
 </template>
@@ -92,15 +92,15 @@
                             <div class="price-section">
                                 <div id="detalles-chico" class="detalles-tamano" style="display: none;">
                                     <span class="dimenciones-modal">{{dimensionsChico}}</span>
-                                    <span class="precio-modal">$ 6000.00</span>
+                                    <span class="precio-modal">{{priceSmall}}</span>
                                 </div>
                                 <div id="detalles-mediano" class="detalles-tamano" style="display: block;">
                                     <span class="dimenciones-modal">{{dimensions}}</span>
-                                    <span class="precio-modal">$ 9000.00</span>
+                                    <span class="precio-modal">{{priceMedium}}</span>
                                 </div>
                                 <div id="detalles-grande" class="detalles-tamano" style="display: none;">
                                     <span class="dimenciones-modal">{{dimensionsGrande}}</span>
-                                    <span class="precio-modal">$ 12000.00</span>
+                                    <span class="precio-modal">{{priceLarge}}</span>
                                 </div>
                             </div>
                             <div class="buy-section" data-id="{{id}}">

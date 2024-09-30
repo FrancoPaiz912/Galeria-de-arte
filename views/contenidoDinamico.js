@@ -63,7 +63,8 @@ function populateTemplate(template, data) {
         'division', 'colorCount', 'id', 'workTypes', 'imageCount',
         'classification', 'titlesCount', 'peopleCount', 'medium',
         'dated', 'people', 'url', 'century', 'priceSmall', 'priceMedium',
-        'priceLarge', 'culture', 'tamaño', 'cantidad', 'precioXcantidad', 'dimensions', 'dimensionsChico', 'dimensionsGrande'
+        'priceLarge', 'culture', 'tamaño', 'cantidad', 'precioXcantidad', 'dimensions', 'dimensionsChico', 'dimensionsGrande',
+        'priceSmall', 'priceMedium', 'priceLarge'
     ];
 
     placeholders.forEach(key => {
