@@ -48,9 +48,9 @@ export function mapApiData(apiData) {
                 peopleCount: record.peoplecount || 0,
                 people: record.people ? record.people.filter(person => person.role === 'Artist').map(person => person.displayname).join(', ') : 'No artist',
                 url: record.url || 'No URL',
-                priceSmall: calculateCost(dimensionsChico, 10),
-                priceMedium: calculateCost(dimensions, 10),
-                priceLarge: calculateCost(dimensionsGrande, 10),
+                priceSmall: calculateCost(dimensionsChico, 10, 'chico'),
+                priceMedium: calculateCost(dimensions, 10, 'mediano'),
+                priceLarge: calculateCost(dimensionsGrande, 10, 'grande'),
                 tamaño: null,
                 cantidad: null,
                 precioXcantidad: null,
@@ -113,40 +113,51 @@ function reSize(dimensions, multiplier) {
 
 function calculateCost(dimensionsInput, PrecioPorCm, size) {
     try {
-        // Extract the width and height from the dimensions input
+        // Extraer el ancho y alto de la entrada de dimensiones
         const [widthStr, heightStr] = dimensionsInput.split('x').map(dim => dim.trim());
 
-        // Parse the numerical values from the strings
+        // Parsear los valores numéricos de las cadenas
         const width = parseFloat(widthStr.replace('cm', ''));
         const height = parseFloat(heightStr.replace('cm', ''));
 
-        // Check if parsing was successful
+        // Verificar si el parseo fue exitoso
         if (isNaN(width) || isNaN(height)) {
             throw new Error("Invalid dimensions");
         }
 
-        // Adjust PrecioPorCm based on size
+        // Ajustar PrecioPorCm según el tamaño
         if (size === 'chico') {
             PrecioPorCm *= 1.5;
         } else if (size === 'grande') {
             PrecioPorCm *= 0.75;
         }
 
-        // Calculate area and then cost
-        const area = width * height; // Area in cm²
-        const cost = area * PrecioPorCm; // Total cost based on area and price per cm
+        // Calcular el área y luego el costo
+        const area = width * height; // Área en cm²
+        let cost = area * PrecioPorCm; // Costo total basado en el área y el precio por cm
 
-        return `$${cost.toFixed(2)}`; // Return the cost formatted to 2 decimal places
-    } catch (error) {
-        // Return specific costs based on the size
-        if (size === 'chico' || dimensionsInput=== 'Chico') {
-            return "$ 6000";
-        } else if (size === 'mediano' || dimensionsInput=== 'Mediano') {
-            return "$ 12000";
-        } else if (size === 'grande' || dimensionsInput=== 'Grande') {
-            return "$ 24000";
+        // Asegurarse de que el costo mínimo sea 6000
+        if (cost < 6000 && size==='chico') {
+            cost = 6000;
         }
-        return "$ 12000"; // Handle any errors if size is not recognized
+        if (cost < 12000 && size==='mediano') {
+            cost = 12000;
+        }
+        if (cost < 24000 && size==='grande') {
+            cost = 24000;
+        }
+
+        return `$${cost.toFixed(2)}`; // Devolver el costo formateado a 2 decimales
+    } catch (error) {
+        // Devolver costos específicos según el tamaño
+        if (size === 'chico') {
+            return "$6000";
+        } else if (size === 'mediano') {
+            return "$12000";
+        } else if (size === 'grande') {
+            return "$24000";
+        }
+        return "$132000"; // Manejar cualquier error si el tamaño no es reconocido
     }
 }
 
