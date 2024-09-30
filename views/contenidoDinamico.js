@@ -44,7 +44,6 @@ export function updatePagination(paginasTotales) {
     });
 }
 
-
 function fetchTemplate(templateId, callback) {
     $.get('template.html')
         .done(function (templateFile) {
@@ -72,7 +71,7 @@ function populateTemplate(template, data) {
         'division', 'colorCount', 'id', 'workTypes', 'imageCount',
         'classification', 'titlesCount', 'peopleCount', 'medium',
         'dated', 'people', 'url', 'century', 'priceSmall', 'priceMedium',
-        'priceLarge', 'culture', 'tamaño', 'cantidad', 'precioXcantidad'
+        'priceLarge', 'culture', 'tamaño', 'cantidad', 'precioXcantidad', 'dimensions', 'dimensionsChico', 'dimensionsGrande'
     ];
 
     placeholders.forEach(key => {
