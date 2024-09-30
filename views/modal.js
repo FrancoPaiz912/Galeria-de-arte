@@ -50,21 +50,16 @@ export async function abrirModal(id, templateId) {
         $modal.css('display', 'none');
     });
 
-    // Aquí añades el listener para cambiar entre tamaños al hacer clic
     $modal.find('.opcion-tamano').on('click', function () {
-        // Remover la clase 'seleccionado' de todas las opciones
+
         $modal.find('.opcion-tamano').removeClass('seleccionado');
 
-        // Agregar la clase 'seleccionado' a la opción clickeada
         $(this).addClass('seleccionado');
 
-        // Obtener el tamaño seleccionado a través del atributo 'data-size'
         var size = $(this).data('size');
 
-        // Ocultar todos los detalles de tamaño
         $modal.find('.detalles-tamano').hide();
 
-        // Mostrar los detalles correspondientes al tamaño seleccionado
         $modal.find('#detalles-' + size).show();
     });
 
