@@ -106,6 +106,14 @@ export async function abrirModal(id, templateId) {
                 objetosGuardados.push(nuevaObra);
             }
             localStorage.setItem(arrayLS, JSON.stringify(objetosGuardados));
+            $(elementHTML).toggleClass('en-coleccion');
+            $(elementHTML).html('<img src="/img/basicas/coleccion.png"> Coleccionar');
+            notificacion("Eliminado de Colección");
+            return;
+        }
+        else if(arrayLS === 'coleccion' && !ifExist){
+            $(elementHTML).toggleClass('en-coleccion');
+            $(elementHTML).html('<img src="/img/basicas/minus-regular-24.png" /> En Colección ');
             notificacion("Agregado a Colección");
         }
     });
