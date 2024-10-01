@@ -17,7 +17,6 @@ $(document).ready(function() {
 document.addEventListener('DOMContentLoaded', function() {
     // Obtener el ID de la URL
     const id = getParameterByName('id');
-    console.log("este es el id pasado " + id);
     updateApiUri({id:id});
     generarContenedor("resultado-compartido-template", "#resultado-compartido");
 
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.getElementById('encuesta').addEventListener('submit', function(event) {
     event.preventDefault();
-    console.log("Enviar tocado");
 
     if (!validarFormulario()) {
         return; // Si la validación falla, no se envía el mailto
@@ -69,7 +67,7 @@ function createMailtoLink(to, subject, body) {
 function createBody(sender, commentary, artist, title, link) {
     // Enviar comentario
     if (!commentary || commentary.trim() === "") {
-        commentary = "Hola, mira esta obra. En este sitio se puede comprar una impresión de alta calidad en varios tamaños.";
+        commentary = "Hola, mira esta obra. En este sitio se pueden comprar impresiones de alta calidad en varios tamaños.";
     }
 
     // Texto del cuerpo

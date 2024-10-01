@@ -33,7 +33,13 @@ export function updatePagination(paginasTotales) {
             updateApiUri({ page: page });
             generarContenedor('card-template', '#card-container');
         }
+        scrollToContainer();
     });
+}
+function scrollToContainer() {
+    $('html, body').animate({
+        scrollTop: $('.contenedor-busqueda').offset().top
+    }, 100); // Duration of the scroll animation in milliseconds
 }
 
 function fetchTemplate(templateId, callback) {

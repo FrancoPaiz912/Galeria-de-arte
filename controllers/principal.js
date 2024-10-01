@@ -8,14 +8,12 @@ export const mappedObjects = [];
 
 export function mapApiData(apiData) {
     paginasTotales = apiData.info.pages;
-
     mappedObjects.length = 0;
     return apiData.records
-        .filter(record => record.hasOwnProperty('primaryimageurl') && record.primaryimageurl !== null)  // Filtrar si primaryimageurl no existe o es null
+        .filter(record => record.hasOwnProperty('primaryimageurl') && record.primaryimageurl !== null)
         .map(record => {
             const id = record.id;
             const imageUrl = record.primaryimageurl;
-            // Obtener el ancho y alto de la primera imagen si está disponible
             let width = null;
             let height = null;
             if (record.images && record.images.length > 0) {
@@ -23,25 +21,24 @@ export function mapApiData(apiData) {
                 height = record.images[0].height || null;
             }
             let dimensions = parseDimensions(record.dimensions) || 'Mediano';
-            let dimensionsChico= reSize(record.dimensions, 0.75);
-            let dimensionsGrande=  reSize(record.dimensions, 1.5);
-            
+            let dimensionsChico = reSize(record.dimensions, 0.75);
+            let dimensionsGrande = reSize(record.dimensions, 1.5);
             const mappedObject = {
                 imageUrl,
                 title: record.title || 'No title',
-                price: '$9000', 
+                price: '$9000',
                 classificationId: record.classificationid || 'No classification ID',
                 division: record.division || 'No division',
                 colorCount: record.colorcount || 0,
                 id: record.id || 'No ID',
                 workTypes: record.worktypes ? record.worktypes.map(type => type.worktype).join(', ') : 'No work types',
                 imageCount: record.imagecount || 0,
-                classification: record.classification || 'No classification', // Already present, no duplication
-                medium: record.medium || 'No medium', // Already present, no duplication
-                dated: record.dated || 'No date', // Already present, no duplication
-                century: record.century || 'No century', // Already present, no duplication
-                culture: record.culture || 'No culture', // New addition
-                dimensions, // New addition
+                classification: record.classification || 'No classification',
+                medium: record.medium || 'No medium',
+                dated: record.dated || 'No date',
+                century: record.century || 'No century',
+                culture: record.culture || 'No culture',
+                dimensions,
                 dimensionsChico,
                 dimensionsGrande,
                 titlesCount: record.titlescount || 0,
@@ -54,111 +51,84 @@ export function mapApiData(apiData) {
                 tamaño: null,
                 cantidad: null,
                 precioXcantidad: null,
-                height: height,  
-                width: width,    
-                aspectRatio: width/height
+                height,
+                width,
+                aspectRatio: width / height
             };
             mappedObjects.push(mappedObject);
             return mappedObject;
         });
 }
+
 function parseDimensions(input) {
     try {
-        // Expresión regular para capturar dimensiones en cm
-        const regex = /(\d+(\.\d+)?)\s*x\s*(\d+(\.\d+)?)/;
-        const match = input.match(regex);
-        
+        const cleanedInput = input
+            .replace(/(?:\w+:)?/g, '')
+            .replace(/[^\d.xX×\s]/g, '')
+            .replace(/\s+/g, ' ')
+            .trim();
+        const regex = /(\d+(?:\.\d+)?)\s*[xX×]\s*(\d+(?:\.\d+)?)/i;
+        const match = cleanedInput.match(regex);
         if (match) {
-            // Convertir las dimensiones a números y devolverlas en cm
-            const width = parseFloat(match[1]).toFixed(2); // Limit to 2 decimal places
-            const height = parseFloat(match[3]).toFixed(2); // Limit to 2 decimal places
+            const width = parseFloat(match[1]).toFixed(2);
+            const height = parseFloat(match[2]).toFixed(2);
             return `${width} cm x ${height} cm`;
         }
-        return null; // Si no se encuentra una coincidencia
+        return null;
     } catch (error) {
-        return "10 cm X 15 cm"; // Si ocurre un error
+        return "10 cm x 15 cm";
     }
 }
 
 function reSize(dimensions, multiplier) {
     try {
-        // Check if the dimensions string is valid
         if (typeof dimensions !== 'string' || !dimensions.includes('x')) {
             return multiplier < 1 ? "Chico" : "Grande";
         }
-
-        // Split the dimensions string by 'x' to separate width and height
-        const [widthStr, heightStr] = dimensions.split('x');
-
-        // Strip whitespace and convert to float
-        const width = parseFloat(widthStr.trim().replace('cm', ''));
-        const height = parseFloat(heightStr.trim().replace('cm', ''));
-
-        // Check if parsing was successful
+        const dimensionParts = dimensions.match(/(\d+(\.\d+)?)(\s*cm)?\s*x\s*(\d+(\.\d+)?)(\s*cm)?/i);
+        if (!dimensionParts) {
+            return multiplier < 1 ? "Chico" : "Grande";
+        }
+        const widthStr = dimensionParts[1];
+        const heightStr = dimensionParts[4];
+        const width = parseFloat(widthStr.trim());
+        const height = parseFloat(heightStr.trim());
         if (isNaN(width) || isNaN(height)) {
             return multiplier < 1 ? "Chico" : "Grande";
         }
-
-        // Calculate the new dimensions
-        const newWidth = (width * multiplier).toFixed(2); // Limit to 2 decimal places
-        const newHeight = (height * multiplier).toFixed(2); // Limit to 2 decimal places
-
+        const newWidth = (width * multiplier).toFixed(2);
+        const newHeight = (height * multiplier).toFixed(2);
         return `${newWidth} cm x ${newHeight} cm`;
     } catch (error) {
-        // Return "Chico" if multiplier < 1, otherwise return "Grande"
         return multiplier < 1 ? "Chico" : "Grande";
     }
 }
 
 function calculateCost(dimensionsInput, PrecioPorCm, size) {
     try {
-        // Extraer el ancho y alto de la entrada de dimensiones
         const [widthStr, heightStr] = dimensionsInput.split('x').map(dim => dim.trim());
-
-        // Parsear los valores numéricos de las cadenas
         const width = parseFloat(widthStr.replace('cm', ''));
         const height = parseFloat(heightStr.replace('cm', ''));
-
-        // Verificar si el parseo fue exitoso
         if (isNaN(width) || isNaN(height)) {
             throw new Error("Invalid dimensions");
         }
-
-        // Ajustar PrecioPorCm según el tamaño
-        if (size === 'chico') {
-            PrecioPorCm *= 1.5;
-        } else if (size === 'grande') {
-            PrecioPorCm *= 0.75;
-        }
-
-        // Calcular el área y luego el costo
-        const area = width * height; // Área en cm²
-        let cost = area * PrecioPorCm; // Costo total basado en el área y el precio por cm
-
-        // Asegurarse de que el costo mínimo sea 6000
-        if (cost < 6000 && size==='chico') {
-            cost = 6000;
-        }
-        if (cost < 12000 && size==='mediano') {
-            cost = 12000;
-        }
-        if (cost < 24000 && size==='grande') {
-            cost = 24000;
-        }
-
-        return `$${cost.toFixed(2)}`; // Devolver el costo formateado a 2 decimales
+        if (size === 'chico') PrecioPorCm *= 1.5;
+        else if (size === 'grande') PrecioPorCm *= 0.75;
+        const area = width * height;
+        let cost = area * PrecioPorCm;
+        if (cost < 6000 && size === 'chico') cost = 6000;
+        if (cost < 12000 && size === 'mediano') cost = 12000;
+        if (cost < 24000 && size === 'grande') cost = 24000;
+        cost = Math.round(cost);
+        return `$${cost}`;
     } catch (error) {
-        // Devolver costos específicos según el tamaño
-        if (size === 'chico') {
-            return "$6000";
-        } else if (size === 'mediano') {
-            return "$12000";
-        } else if (size === 'grande') {
-            return "$24000";
-        }
-        return "$12000"; // Manejar cualquier error si el tamaño no es reconocido
+        if (size === 'chico') return "$6000";
+        else if (size === 'mediano') return "$12000";
+        else if (size === 'grande') return "$24000";
+        return "$12000";
     }
 }
+
 
 export function getCurrentPage() {
     const url = new URL(currentUri);

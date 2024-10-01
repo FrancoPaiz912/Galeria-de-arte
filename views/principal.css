@@ -7,7 +7,6 @@
   padding: 0;
 }
 
-
 html {
   scroll-behavior: smooth;
 }
@@ -50,9 +49,9 @@ body {
   background-color: #111;
 }
 
-  #wrapper {
-    background-color: #eee;
-  }
+#wrapper {
+  background-color: #eee;
+}
 
 /* Grid Template */
 .grid-template {
@@ -63,28 +62,26 @@ body {
 
 .row.make-columns {
   column-count: 1;
-  /* Four columns */
   column-gap: 1em;
-  /* Space between columns */
 }
 
-.row.make-columns > div {
-  break-inside: avoid; /* Prevents items from breaking between columns */
-  display: inline-block; /* Ensures items behave as blocks */
+.row.make-columns>div {
+  break-inside: avoid;
   padding: 0.5rem;
-  width: 100%; /* Ensure items take full width of the column */
-  box-sizing: border-box; /* Include padding in width calculation */
+  width: 100%;
+  box-sizing: border-box;
   border: 1px solid #bbb;
   border-radius: 0.5em;
   box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.1);
   text-align: center;
   background-color: #fff;
-  margin-bottom: 0.5em; /* Space between items */
-  transition: box-shadow 0.3s ease; /* Agrega transición para la sombra */
+  margin-bottom: 1em;
+  transition: box-shadow 0.3s ease;
 }
 
-.row.make-columns > div:hover {
-  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.5); /* Sombra más grande y oscura al hacer hover */
+.row.make-columns>div:hover {
+  box-shadow: 0 0.5em 1em rgba(0, 0, 0, 0.5);
+  /* Sombra más grande y oscura al hacer hover */
 }
 
 
@@ -166,20 +163,19 @@ nav ul a {
 
 main {
   padding: 0 1em;
-  min-height:80vh;
+  min-height: 80vh;
 }
 
 /* Search Container */
 .contenedor-busqueda {
   padding: 1em 0 0;
-  margin-bottom: 1em;
 }
 
 .contenedor-input-busqueda {
   display: flex;
   align-items: center;
-  flex-wrap: wrap; /* Allows wrapping */
-  width: 100%; /* Ensure it doesn't exceed the container width */
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .contenedor-input-busqueda input {
@@ -188,7 +184,7 @@ main {
   border: 1px solid #bbb;
   border-radius: 0.5em 0 0 0.5em;
   height: 2.5em;
-  min-width: 0; /* Ensures input shrinks with smaller screens */
+  min-width: 0;
   max-width: calc(100% - 3em);
 }
 
@@ -222,6 +218,10 @@ select {
 .filtro-categoria select {
   border-radius: 0.5em;
 }
+
+#card-container {
+  margin-top: 1em;
+}
 /* Cards */
 .contenedor-tarjeta {
   border: 1px solid #bbb;
@@ -230,7 +230,6 @@ select {
   text-align: center;
   background-color: #fff;
   grid-column: span 12;
-  margin-top: 0.5em;
   padding-bottom: 0.5em;
   cursor: pointer;
 }
@@ -299,9 +298,11 @@ select {
 }
 
 .imagen-modal {
-  /*width: 100%;*/
   width: auto;
   display: block;
+  object-fit: fill;
+  background-color: #555;
+  margin: auto;
 }
 
 /* Share and Collect */
@@ -316,10 +317,9 @@ select {
   background-color: white;
   width: 100%;
   margin: 1em 1em 0 0;
-  padding-left: 1em;
+  padding: 1em;
   border: 1px solid #bbb;
   border-radius: 0.5em;
-  padding-bottom: 1em;
 
 }
 
@@ -332,6 +332,10 @@ select {
 .contenedor-imagen-modal {
   border-radius: 0.5em;
   overflow: hidden;
+  min-width: 80vw;
+  border: 1px solid #bbb;
+  background-color: #333;
+  height: fit-content;
 }
 
 .compartir-coleccionar .izquierda,
@@ -347,6 +351,12 @@ select {
 .compartir-coleccionar .derecha a {
   text-decoration: none;
   color: black;
+}
+
+.derecha.en-coleccion {
+  background-color: #ff0000;
+  /* Rojo tenue */
+  color: white;
 }
 
 
@@ -451,9 +461,10 @@ body.modal-abierto {
   color: #333;
   width: 100%;
   display: block;
-  text-align:center;
+  text-align: center;
   padding-top: 1em;
 }
+
 /* Pagination */
 .pagination {
   display: flex;
@@ -526,7 +537,14 @@ footer {
 
 .contenedor-contacto {
   margin: 1em 0;
-  width: 100%; /* Asegura que el contenedor ocupe el ancho completo */
+  width: 100%;
+}
+
+iframe {
+  width: calc(100% - 2em);
+  max-width: 888px;
+  aspect-ratio: 1;
+
 }
 
 .datos-persona {
@@ -537,19 +555,15 @@ footer {
 
 
 
-.imagen-persona img, .datos-persona img {
+.imagen-persona img,
+.datos-persona img {
   width: 100%;
   height: auto;
   border-radius: 0.5em;
   padding: 1em;
 }
 
-/* Iframe */
-iframe {
-  width: 90vw;
-  aspect-ratio: 1;
-  background: black;
-}
+
 
 
 /* notififaciones*/
@@ -568,9 +582,7 @@ iframe {
   z-index: 99000;
   font-weight: bold;
   width: 80%;
-  /* Adjust this to make it wider or narrower */
   max-width: 885px;
-  /* Optional: Limit the maximum width */
 }
 
 /* pagina carrito */
@@ -616,9 +628,7 @@ iframe {
 .cantidad-botones {
   display: flex;
   justify-content: space-between;
-  /* Alinea la cantidad a la izquierda y los botones a la derecha */
   align-items: center;
-  /* Centra verticalmente los elementos */
   padding: 1em 1em;
   height: 2em;
 }
@@ -668,7 +678,6 @@ iframe {
 .formulario_general .botones {
   display: flex;
   justify-content: space-between;
-  /* Espacio entre botones */
 }
 
 .botones {
@@ -716,7 +725,6 @@ iframe {
 
   .row.make-columns {
     column-count: 2;
-    /* Four columns */
   }
 
   header h1 {
@@ -739,6 +747,7 @@ iframe {
   .artista {
     font-size: 1.1em;
   }
+
   header {
     height: 115px;
   }
@@ -751,7 +760,7 @@ iframe {
 
 }
 
-@media (min-width: 650px){
+@media (min-width: 650px) {
 
   nav ul {
     grid-template-columns: repeat(4, 1fr);
@@ -773,37 +782,44 @@ iframe {
 
   .row.make-columns {
     column-count: 3;
-    /* Four columns */
   }
+
   .modal-contenido {
     padding-bottom: 1em;
   }
 
   .contenedor-grid-imagen-datos {
     display: flex;
-    /* Use flexbox to align children */
     gap: 1em;
   }
 
   .contenedor-imagen-modal {
     flex-grow: 1;
-    /* Allow this element to take the remaining space */
   }
 
   .contenedor-datos-modal {
     min-width: 350px;
-    /* Fixed width for the right element */
   }
 
   .card-box {
     margin-top: 0;
   }
+
+  .contenedor-imagen-modal {
+    min-width: 35vw;
+  }
+
 }
-@media (min-width: 1024px)
-{
+
+@media (min-width: 1024px) {
+  .contenedor-imagen-modal {
+    min-width: 30vw;
+  }
+
   .notification {
     width: 35%;
   }
+
   .contenedor-flex {
     display: flex;
 
@@ -814,88 +830,89 @@ iframe {
     margin: 1em 1em 0 0;
     padding-left: 1em;
     border: 1px solid #bbb;
-    
+
   }
 
   #publicidad {
     display: block;
-    width: auto; /* Mantiene la relación de aspecto */
+    width: auto;
     float: right;
   }
-  .contenedor-barras{
+
+  .contenedor-barras {
     display: block;
-    overflow: hidden; /* Opcional: evita el desbordamiento */
+    overflow: hidden;
 
   }
+
   #menu-toggle {
-    display:none;
+    display: none;
   }
-  .contenedor-barras
-  {
+
+  .contenedor-barras {
     grid-column: span 3;
   }
-  .contenedor-titulo{
+
+  .contenedor-titulo {
     grid-column: span 7;
   }
-  .contenedor-imagen-modal img {
+
+  .imagen-modal {
     max-height: 80vh;
+    margin: auto;
   }
-.modal-contenido
-{
-  max-width: 1024px;
-  margin-top: 1em;
-}
-.filtros
-{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2em;
-}
-.filtro-categoria 
-{
-  grid-column: span 1;
-}
-.filtro-categoria label, select
-{
-  grid-column: span 12;
-}
-.modal-titulo
-{
-  font-size: 1.5em;
+
+  .modal-contenido {
+    max-width: 1024px;
+    margin-top: 1em;
+  }
+
+  .filtros {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2em;
+  }
+
+  .filtro-categoria {
+    grid-column: span 1;
+  }
+
+  .filtro-categoria label,
+  select {
+    grid-column: span 12;
+  }
+
+  .modal-titulo {
+    font-size: 1.5em;
+  }
+
+  .contenedor-contacto {
+    display: flex;
+  }
+
+  .contacto-izquierd {
+    width: 25%;
+  }
+
+  .contacto-derecho {
+    width: 75%;
+    padding-left: 1em;
+  }
 }
 
-.contenedor-contacto
-{
-display: flex;
-}
-.contacto-izquierd {
-  width: 25%; /* 1/3 del ancho */
-}
+@media (min-width: 1280px) {
+  .imagen-modal {
+    min-width: 25vw;
+  }
 
-.contacto-derecho {
-  width: 75%; /* 2/3 del ancho */
-  padding-left: 1em;
-}
-iframe {
-  width: 67vw;
-  max-width: 888px;
-}
-}
-@media (min-width: 1280px)
-{
   #wrapper {
     max-width: 1280px;
-    width:1280px;
-    margin:auto;
+    width: 1280px;
+    margin: auto;
     background-color: #eee;
   }
+
   .row.make-columns {
     column-count: 3;
-    /* Four columns */
   }
-}
-
-.derecha.en-coleccion {
-  background-color: #ff0000; /* Rojo tenue */
-  color: white;
 }

@@ -68,7 +68,7 @@ export async function abrirModal(id, templateId) {
     if (objetosGuardados.length > 0 && ifExist) {
         const element = $('.derecha');
         $(element).toggleClass('en-coleccion');
-        $(element).html('<img src="/img/basicas/minus-regular-24.png" /> En coleccion ');
+        $(element).html('<img src="/img/basicas/minus-regular-24.png" /> En Colección ');
     }
 
     $('.buy-section, .derecha').on("click", function () {
